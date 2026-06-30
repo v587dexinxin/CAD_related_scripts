@@ -1,0 +1,177 @@
+你的这个情况非常关键：LSS 条件下按生物学预期应该有 KLF2、KLF4、NOS3、THBD 等保护性基因激活，但现在 Hi-Coatis bw 信号在全基因组、各类区域、甚至 LSS-up genes 附近都整体低于 OSS。这种情况下，不建议简单按全基因组总信号或 RPKM 继续比较，因为这会把“文库整体捕获效率差异/测序深度差异”和“真实生物学差异”混在一起。
+
+我建议你采用下面这种策略：
+
+用于定量比较：基于 peak/raw counts 做 DESeq2 或 TMM/RLE normalization
+用于浏览器展示：基于 stable regions 或 housekeeping/union peaks 的 median scaling 重新缩放 bw
+
+1. 不建议继续使用单纯 RPKM 作为最终比较标准
+
+RPKM 只校正了测序深度和区间长度，但没有很好地校正以下问题：
+
+Hi-Coatis 捕获效率差异；
+样本间有效 reads 利用率不同；
+LSS/OSS 的 cis/trans ratio 不同；
+文库复杂度不同；
+OSS 可能存在全局更强的背景或更强的活跃区域捕获；
+LSS 文库可能整体 signal-to-noise 偏低。
+
+所以你现在看到：
+
+LSS.RPKM.bw 整体低于 OSS.RPKM.bw
+
+不能马上解释为：
+
+LSS 转录活跃区域整体弱于 OSS
+
+更可能是：
+
+LSS 文库整体 scale 偏低，导致真实的 LSS 特异性信号被压低
+2. 最推荐：用 union peaks 构建 count matrix，然后用 DESeq2 size factor 归一化
+
+这是最适合你后续论文分析的方式。
+
+思路是：
+
+合并 LSS 和 OSS 的 peaks，得到 union peaks；
+统计每个样本在每个 union peak 中的 raw read counts；
+用 DESeq2 的 median-of-ratios 方法估计 size factor；
+用 normalized counts 比较 LSS 和 OSS；
+根据 normalized counts 找 LSS-up、OSS-up peaks；
+bw 只用于展示，不作为主要定量依据。
+Step 1：合并 union peaks
+cat LSS_peaks.bed OSS_peaks.bed | \
+sort -k1,1 -k2,2n | \
+bedtools merge -i - > LSS_OSS_union_peaks.bed
+Step 2：用 featureCounts 统计 raw counts
+
+如果你有去重后的 BAM：
+
+featureCounts \
+  -F SAF \
+  -a union_peaks.saf \
+  -o HiCoatis_union_peaks_counts.txt \
+  LSS_rep1.bam LSS_rep2.bam OSS_rep1.bam OSS_rep2.bam \
+  -T 8
+
+BED 要先转 SAF：
+
+awk 'BEGIN{OFS="\t"}{
+  print "peak_"NR,$1,$2+1,$3,"."
+}' LSS_OSS_union_peaks.bed > union_peaks.saf
+
+SAF 格式是：
+
+GeneID  Chr  Start  End  Strand
+
+注意：SAF 是 1-based，所以 BED 的 start 要 +1。
+
+Step 3：DESeq2 归一化
+library(DESeq2)
+
+count_df <- read.table(
+  "HiCoatis_union_peaks_counts.txt",
+  header = TRUE,
+  sep = "\t",
+  comment.char = "#",
+  check.names = FALSE
+)
+
+# featureCounts 前几列是注释信息，后面是样本 counts
+counts <- count_df[, 7:ncol(count_df)]
+rownames(counts) <- count_df$Geneid
+
+# 样本信息
+condition <- factor(c("LSS", "LSS", "OSS", "OSS"))
+coldata <- data.frame(row.names = colnames(counts), condition = condition)
+
+dds <- DESeqDataSetFromMatrix(
+  countData = counts,
+  colData = coldata,
+  design = ~ condition
+)
+
+# 去除低 counts peaks
+dds <- dds[rowSums(counts(dds)) >= 10, ]
+
+dds <- DESeq(dds)
+
+# 查看 size factors
+sizeFactors(dds)
+
+# 获得归一化后的 counts
+norm_counts <- counts(dds, normalized = TRUE)
+
+write.table(
+  norm_counts,
+  file = "HiCoatis_union_peaks_DESeq2_normalized_counts.txt",
+  sep = "\t",
+  quote = FALSE,
+  row.names = TRUE
+)
+
+# 差异分析
+res <- results(dds, contrast = c("condition", "LSS", "OSS"))
+
+res_df <- as.data.frame(res)
+res_df$peak_id <- rownames(res_df)
+
+write.table(
+  res_df,
+  file = "HiCoatis_LSS_vs_OSS_DESeq2_results.txt",
+  sep = "\t",
+  quote = FALSE,
+  row.names = FALSE
+)
+
+这个结果比直接比较 RPKM bw 更可靠。
+
+3. 对 bw 展示：建议用 DESeq2 size factor 或 stable peaks 重新缩放
+
+你的问题是想让 LSS 和 OSS 的 bw 信号“可以直接比较”。这里有两个推荐方案。
+
+方案 A：用 DESeq2 size factor 缩放 bigWig，最推荐
+
+如果你的 DESeq2 得到：
+
+sizeFactors(dds)
+
+例如：
+
+LSS_rep1    0.62
+LSS_rep2    0.70
+OSS_rep1    1.35
+OSS_rep2    1.28
+
+那么 bw 的缩放因子应该是：
+
+scale factor = 1 / sizeFactor
+
+也就是：
+
+LSS_rep1    1.61
+LSS_rep2    1.43
+OSS_rep1    0.74
+OSS_rep2    0.78
+
+然后用 deepTools 重新 scale bw：
+
+bigwigCompare \
+  -b1 LSS_rep1.RPKM.bw \
+  -b2 LSS_rep1.RPKM.bw \
+  --operation first \
+  --scaleFactors 1.61:1 \
+  -o LSS_rep1.DESeq2_scaled.bw \
+  -p 8
+bigwigCompare \
+  -b1 OSS_rep1.RPKM.bw \
+  -b2 OSS_rep1.RPKM.bw \
+  --operation first \
+  --scaleFactors 0.74:1 \
+  -o OSS_rep1.DESeq2_scaled.bw \
+  -p 8
+
+如果你只有合并后的 LSS.bw 和 OSS.bw，也可以先基于 union peaks 的 counts 估计两个条件的 scale factor，然后对合并 bw 缩放。
+
+这种方式的优点是：
+归一化因子来自 peak raw counts，而不是来自已经归一化过的 bw 信号。

@@ -1,0 +1,2056 @@
+    if (len(overlap1) != 0):
+        overlap = pd.concat([overlap , overlap1])
+    if (len(overlap2) != 0):
+        overlap = pd.concat([overlap , overlap2])    
+    overlap = overlap.drop_duplicates()
+    # overlap.to_csv('H:\\work\\Postdoctoral\\GWAS疾病位点检测\\results\\HiRPC\\SNP_peaks_loops\\' + peak_name + '.bedpe' , header=None , index = None , sep = '\t')
+    
+    
+    for i in overlap.index:
+        g = overlap.loc[i]['chr1']
+        start1 = overlap.loc[i]['start1']
+        end1 = overlap.loc[i]['end1']
+        start2 = overlap.loc[i]['start2']
+        end2 = overlap.loc[i]['end2']
+        tmp_promoter = promoter[promoter['chr'] == g]
+        mask1 = (tmp_promoter['start'] <= end1) & (tmp_promoter['end'] >= start1)
+        mask2 = (tmp_promoter['start'] <= end2) & (tmp_promoter['end'] >= start2)
+        overlap1 = tmp_promoter[mask1]
+        overlap2 = tmp_promoter[mask2]
+        if len(overlap1) != 0:
+            # print (overlap1)
+            selected_genes = pd.concat([selected_genes , overlap1])
+        if len(overlap2) != 0:
+            # print (overlap2)
+            selected_genes = pd.concat([selected_genes , overlap2])
+    if len(selected_genes) != 0:
+        selected_genes = selected_genes.drop_duplicates()        
+        selected_genes = selected_genes.sort_values(by = 'FPKM' , ascending=False)        
+        # selected_genes = selected_genes[selected_genes['FPKM'] >= 10]
+        # gene_names = list(selected_genes['gene_name'])
+        # selected_peak_genes[peak_name] = gene_names
+        
+        
+        # print (selected_genes)
+        
+        
+        for i in list(selected_genes['gene_name']):
+            if i in CVD_genes:
+                print (peak_name , i)
+selected_genes
+RNA[RNA['Gene_Name'] == 'PCSK9']
+peaks_name = list(union_snp_peaks['name'])
+for peak_name in peaks_name:
+    overlap = pd.DataFrame([])
+    selected_genes = pd.DataFrame([])
+    peak = union_snp_peaks[union_snp_peaks['name'] == peak_name]
+    g = peak.iloc[0]['chr']
+    start = peak.iloc[0]['start']
+    end = peak.iloc[0]['end']
+    tmp_loops = loops[loops['chr1'] == g]
+    tmp_snps = SNPs[SNPs['CHR_ID'] == g.lstrip('chr')]
+    mask1 = (tmp_loops['start1'] <= end) & (tmp_loops['end1'] >= start)
+    mask2 = (tmp_loops['start2'] <= end) & (tmp_loops['end2'] >= start)
+    mask3 = (tmp_snps['CHR_POS'] >= start - 100) & (tmp_snps['CHR_POS'] <= end + 100)
+    overlap1 = tmp_loops[mask1]
+    overlap2 = tmp_loops[mask2]
+    overlap3 = tmp_snps[mask3]
+    print (overlap3)
+    if (len(overlap1) != 0):
+        overlap = pd.concat([overlap , overlap1])
+    if (len(overlap2) != 0):
+        overlap = pd.concat([overlap , overlap2])    
+    overlap = overlap.drop_duplicates()
+    # overlap.to_csv('H:\\work\\Postdoctoral\\GWAS疾病位点检测\\results\\HiRPC\\SNP_peaks_loops\\' + peak_name + '.bedpe' , header=None , index = None , sep = '\t')
+    
+    
+    for i in overlap.index:
+        g = overlap.loc[i]['chr1']
+        start1 = overlap.loc[i]['start1']
+        end1 = overlap.loc[i]['end1']
+        start2 = overlap.loc[i]['start2']
+        end2 = overlap.loc[i]['end2']
+        tmp_promoter = promoter[promoter['chr'] == g]
+        mask1 = (tmp_promoter['start'] <= end1) & (tmp_promoter['end'] >= start1)
+        mask2 = (tmp_promoter['start'] <= end2) & (tmp_promoter['end'] >= start2)
+        overlap1 = tmp_promoter[mask1]
+        overlap2 = tmp_promoter[mask2]
+        if len(overlap1) != 0:
+            # print (overlap1)
+            selected_genes = pd.concat([selected_genes , overlap1])
+        if len(overlap2) != 0:
+            # print (overlap2)
+            selected_genes = pd.concat([selected_genes , overlap2])
+    if len(selected_genes) != 0:
+        selected_genes = selected_genes.drop_duplicates()        
+        selected_genes = selected_genes.sort_values(by = 'FPKM' , ascending=False)        
+        # selected_genes = selected_genes[selected_genes['FPKM'] >= 10]
+        # gene_names = list(selected_genes['gene_name'])
+        # selected_peak_genes[peak_name] = gene_names
+        
+        
+        # print (selected_genes)
+        
+        
+        for i in list(selected_genes['gene_name']):
+            if i in CVD_genes:
+                print (peak_name , i)
+for peak_name in peaks_name:
+    overlap = pd.DataFrame([])
+    selected_genes = pd.DataFrame([])
+    peak = union_snp_peaks[union_snp_peaks['name'] == peak_name]
+    g = peak.iloc[0]['chr']
+    start = peak.iloc[0]['start']
+    end = peak.iloc[0]['end']
+    tmp_loops = loops[loops['chr1'] == g]
+    tmp_snps = SNPs[SNPs['CHR_ID'] == g.lstrip('chr')]
+    mask1 = (tmp_loops['start1'] <= end) & (tmp_loops['end1'] >= start)
+    mask2 = (tmp_loops['start2'] <= end) & (tmp_loops['end2'] >= start)
+    mask3 = (tmp_snps['CHR_POS'] >= start - 100) & (tmp_snps['CHR_POS'] <= end + 100)
+    overlap1 = tmp_loops[mask1]
+    overlap2 = tmp_loops[mask2]
+    overlap3 = tmp_snps[mask3]
+    # print (overlap3)
+    if (len(overlap1) != 0):
+        overlap = pd.concat([overlap , overlap1])
+    if (len(overlap2) != 0):
+        overlap = pd.concat([overlap , overlap2])    
+    overlap = overlap.drop_duplicates()
+    # overlap.to_csv('H:\\work\\Postdoctoral\\GWAS疾病位点检测\\results\\HiRPC\\SNP_peaks_loops\\' + peak_name + '.bedpe' , header=None , index = None , sep = '\t')
+    
+    
+    for i in overlap.index:
+        g = overlap.loc[i]['chr1']
+        start1 = overlap.loc[i]['start1']
+        end1 = overlap.loc[i]['end1']
+        start2 = overlap.loc[i]['start2']
+        end2 = overlap.loc[i]['end2']
+        tmp_promoter = promoter[promoter['chr'] == g]
+        mask1 = (tmp_promoter['start'] <= end1) & (tmp_promoter['end'] >= start1)
+        mask2 = (tmp_promoter['start'] <= end2) & (tmp_promoter['end'] >= start2)
+        overlap1 = tmp_promoter[mask1]
+        overlap2 = tmp_promoter[mask2]
+        if len(overlap1) != 0:
+            # print (overlap1)
+            selected_genes = pd.concat([selected_genes , overlap1])
+        if len(overlap2) != 0:
+            # print (overlap2)
+            selected_genes = pd.concat([selected_genes , overlap2])
+    if len(selected_genes) != 0:
+        selected_genes = selected_genes.drop_duplicates()        
+        selected_genes = selected_genes.sort_values(by = 'FPKM' , ascending=False)        
+        # selected_genes = selected_genes[selected_genes['FPKM'] >= 10]
+        # gene_names = list(selected_genes['gene_name'])
+        # selected_peak_genes[peak_name] = gene_names
+        
+        
+        # print (selected_genes)
+        
+        
+        for i in list(selected_genes['gene_name']):
+            if i in CVD_genes:
+                print (peak_name , i)
+peaks_name = ['HCT116_R2_q0.05_peak_9402']
+
+# selected_peak_genes = {}
+
+for peak_name in peaks_name:
+    overlap = pd.DataFrame([])
+    selected_genes = pd.DataFrame([])
+    peak = union_snp_peaks[union_snp_peaks['name'] == peak_name]
+    g = peak.iloc[0]['chr']
+    start = peak.iloc[0]['start']
+    end = peak.iloc[0]['end']
+    tmp_loops = loops[loops['chr1'] == g]
+    tmp_snps = SNPs[SNPs['CHR_ID'] == g.lstrip('chr')]
+    mask1 = (tmp_loops['start1'] <= end) & (tmp_loops['end1'] >= start)
+    mask2 = (tmp_loops['start2'] <= end) & (tmp_loops['end2'] >= start)
+    mask3 = (tmp_snps['CHR_POS'] >= start - 100) & (tmp_snps['CHR_POS'] <= end + 100)
+    overlap1 = tmp_loops[mask1]
+    overlap2 = tmp_loops[mask2]
+    overlap3 = tmp_snps[mask3]
+    # print (overlap3)
+    if (len(overlap1) != 0):
+        overlap = pd.concat([overlap , overlap1])
+    if (len(overlap2) != 0):
+        overlap = pd.concat([overlap , overlap2])    
+    overlap = overlap.drop_duplicates()
+    # overlap.to_csv('H:\\work\\Postdoctoral\\GWAS疾病位点检测\\results\\HiRPC\\SNP_peaks_loops\\' + peak_name + '.bedpe' , header=None , index = None , sep = '\t')
+    
+    
+    for i in overlap.index:
+        g = overlap.loc[i]['chr1']
+        start1 = overlap.loc[i]['start1']
+        end1 = overlap.loc[i]['end1']
+        start2 = overlap.loc[i]['start2']
+        end2 = overlap.loc[i]['end2']
+        tmp_promoter = promoter[promoter['chr'] == g]
+        mask1 = (tmp_promoter['start'] <= end1) & (tmp_promoter['end'] >= start1)
+        mask2 = (tmp_promoter['start'] <= end2) & (tmp_promoter['end'] >= start2)
+        overlap1 = tmp_promoter[mask1]
+        overlap2 = tmp_promoter[mask2]
+        if len(overlap1) != 0:
+            # print (overlap1)
+            selected_genes = pd.concat([selected_genes , overlap1])
+        if len(overlap2) != 0:
+            # print (overlap2)
+            selected_genes = pd.concat([selected_genes , overlap2])
+    if len(selected_genes) != 0:
+        selected_genes = selected_genes.drop_duplicates()        
+        selected_genes = selected_genes.sort_values(by = 'FPKM' , ascending=False)        
+        # selected_genes = selected_genes[selected_genes['FPKM'] >= 10]
+        # gene_names = list(selected_genes['gene_name'])
+        # selected_peak_genes[peak_name] = gene_names
+        
+        
+        # print (selected_genes)
+        
+        
+        for i in list(selected_genes['gene_name']):
+            if i in CVD_genes:
+                print (peak_name , i)
+for peak_name in peaks_name:
+    overlap = pd.DataFrame([])
+    selected_genes = pd.DataFrame([])
+    peak = union_snp_peaks[union_snp_peaks['name'] == peak_name]
+    g = peak.iloc[0]['chr']
+    start = peak.iloc[0]['start']
+    end = peak.iloc[0]['end']
+    tmp_loops = loops[loops['chr1'] == g]
+    tmp_snps = SNPs[SNPs['CHR_ID'] == g.lstrip('chr')]
+    mask1 = (tmp_loops['start1'] <= end) & (tmp_loops['end1'] >= start)
+    mask2 = (tmp_loops['start2'] <= end) & (tmp_loops['end2'] >= start)
+    mask3 = (tmp_snps['CHR_POS'] >= start - 100) & (tmp_snps['CHR_POS'] <= end + 100)
+    overlap1 = tmp_loops[mask1]
+    overlap2 = tmp_loops[mask2]
+    overlap3 = tmp_snps[mask3]
+    print (overlap3)
+    if (len(overlap1) != 0):
+        overlap = pd.concat([overlap , overlap1])
+    if (len(overlap2) != 0):
+        overlap = pd.concat([overlap , overlap2])    
+    overlap = overlap.drop_duplicates()
+    # overlap.to_csv('H:\\work\\Postdoctoral\\GWAS疾病位点检测\\results\\HiRPC\\SNP_peaks_loops\\' + peak_name + '.bedpe' , header=None , index = None , sep = '\t')
+    
+    
+    for i in overlap.index:
+        g = overlap.loc[i]['chr1']
+        start1 = overlap.loc[i]['start1']
+        end1 = overlap.loc[i]['end1']
+        start2 = overlap.loc[i]['start2']
+        end2 = overlap.loc[i]['end2']
+        tmp_promoter = promoter[promoter['chr'] == g]
+        mask1 = (tmp_promoter['start'] <= end1) & (tmp_promoter['end'] >= start1)
+        mask2 = (tmp_promoter['start'] <= end2) & (tmp_promoter['end'] >= start2)
+        overlap1 = tmp_promoter[mask1]
+        overlap2 = tmp_promoter[mask2]
+        if len(overlap1) != 0:
+            # print (overlap1)
+            selected_genes = pd.concat([selected_genes , overlap1])
+        if len(overlap2) != 0:
+            # print (overlap2)
+            selected_genes = pd.concat([selected_genes , overlap2])
+    if len(selected_genes) != 0:
+        selected_genes = selected_genes.drop_duplicates()        
+        selected_genes = selected_genes.sort_values(by = 'FPKM' , ascending=False)        
+        # selected_genes = selected_genes[selected_genes['FPKM'] >= 10]
+        # gene_names = list(selected_genes['gene_name'])
+        # selected_peak_genes[peak_name] = gene_names
+        
+        
+        # print (selected_genes)
+        
+        
+        for i in list(selected_genes['gene_name']):
+            if i in CVD_genes:
+                print (peak_name , i)
+selected_genes
+peaks_name = ['HCT116_R2_q0.05_peak_2394']
+for peak_name in peaks_name:
+    overlap = pd.DataFrame([])
+    selected_genes = pd.DataFrame([])
+    peak = union_snp_peaks[union_snp_peaks['name'] == peak_name]
+    g = peak.iloc[0]['chr']
+    start = peak.iloc[0]['start']
+    end = peak.iloc[0]['end']
+    tmp_loops = loops[loops['chr1'] == g]
+    tmp_snps = SNPs[SNPs['CHR_ID'] == g.lstrip('chr')]
+    mask1 = (tmp_loops['start1'] <= end) & (tmp_loops['end1'] >= start)
+    mask2 = (tmp_loops['start2'] <= end) & (tmp_loops['end2'] >= start)
+    mask3 = (tmp_snps['CHR_POS'] >= start - 100) & (tmp_snps['CHR_POS'] <= end + 100)
+    overlap1 = tmp_loops[mask1]
+    overlap2 = tmp_loops[mask2]
+    overlap3 = tmp_snps[mask3]
+    print (overlap3)
+    if (len(overlap1) != 0):
+        overlap = pd.concat([overlap , overlap1])
+    if (len(overlap2) != 0):
+        overlap = pd.concat([overlap , overlap2])    
+    overlap = overlap.drop_duplicates()
+    # overlap.to_csv('H:\\work\\Postdoctoral\\
+peaks_name = list(union_snp_peaks['name'])
+for peak_name in peaks_name:
+    overlap = pd.DataFrame([])
+    selected_genes = pd.DataFrame([])
+    peak = union_snp_peaks[union_snp_peaks['name'] == peak_name]
+    g = peak.iloc[0]['chr']
+    start = peak.iloc[0]['start']
+    end = peak.iloc[0]['end']
+    tmp_loops = loops[loops['chr1'] == g]
+    tmp_snps = SNPs[SNPs['CHR_ID'] == g.lstrip('chr')]
+    mask1 = (tmp_loops['start1'] <= end) & (tmp_loops['end1'] >= start)
+    mask2 = (tmp_loops['start2'] <= end) & (tmp_loops['end2'] >= start)
+    mask3 = (tmp_snps['CHR_POS'] >= start - 100) & (tmp_snps['CHR_POS'] <= end + 100)
+    overlap1 = tmp_loops[mask1]
+    overlap2 = tmp_loops[mask2]
+    overlap3 = tmp_snps[mask3]
+    # print (overlap3)
+    if (len(overlap1) != 0):
+        overlap = pd.concat([overlap , overlap1])
+    if (len(overlap2) != 0):
+        overlap = pd.concat([overlap , overlap2])    
+    overlap = overlap.drop_duplicates()
+    # overlap.to_csv('H:\\work\\Postdoctoral\\GWAS疾病位点检测\\results\\HiRPC\\SNP_peaks_loops\\' + peak_name + '.bedpe' , header=None , index = None , sep = '\t')
+    
+    
+    for i in overlap.index:
+        g = overlap.loc[i]['chr1']
+        start1 = overlap.loc[i]['start1']
+        end1 = overlap.loc[i]['end1']
+        start2 = overlap.loc[i]['start2']
+        end2 = overlap.loc[i]['end2']
+        tmp_promoter = promoter[promoter['chr'] == g]
+        mask1 = (tmp_promoter['start'] <= end1) & (tmp_promoter['end'] >= start1)
+        mask2 = (tmp_promoter['start'] <= end2) & (tmp_promoter['end'] >= start2)
+        overlap1 = tmp_promoter[mask1]
+        overlap2 = tmp_promoter[mask2]
+        if len(overlap1) != 0:
+            # print (overlap1)
+            selected_genes = pd.concat([selected_genes , overlap1])
+        if len(overlap2) != 0:
+            # print (overlap2)
+            selected_genes = pd.concat([selected_genes , overlap2])
+    if len(selected_genes) != 0:
+        selected_genes = selected_genes.drop_duplicates()        
+        selected_genes = selected_genes.sort_values(by = 'FPKM' , ascending=False)        
+        # selected_genes = selected_genes[selected_genes['FPKM'] >= 10]
+        # gene_names = list(selected_genes['gene_name'])
+        # selected_peak_genes[peak_name] = gene_names
+        
+        
+        # print (selected_genes)
+        
+        
+        for i in list(selected_genes['gene_name']):
+            if i in CVD_genes:
+                print (peak_name , i)
+RNA[RNA['Gene_Name'] == 'PCSK9']
+RNA[RNA['Gene_Name'] == 'HTRA1']
+RNA[RNA['Gene_Name'] == 'SWAP70']
+peaks_name = ['HCT116_R2_q0.05_peak_10572']
+
+
+# selected_peak_genes = {}
+
+for peak_name in peaks_name:
+    overlap = pd.DataFrame([])
+    selected_genes = pd.DataFrame([])
+    peak = union_snp_peaks[union_snp_peaks['name'] == peak_name]
+    g = peak.iloc[0]['chr']
+    start = peak.iloc[0]['start']
+    end = peak.iloc[0]['end']
+    tmp_loops = loops[loops['chr1'] == g]
+    tmp_snps = SNPs[SNPs['CHR_ID'] == g.lstrip('chr')]
+    mask1 = (tmp_loops['start1'] <= end) & (tmp_loops['end1'] >= start)
+    mask2 = (tmp_loops['start2'] <= end) & (tmp_loops['end2'] >= start)
+    mask3 = (tmp_snps['CHR_POS'] >= start - 100) & (tmp_snps['CHR_POS'] <= end + 100)
+    overlap1 = tmp_loops[mask1]
+    overlap2 = tmp_loops[mask2]
+    overlap3 = tmp_snps[mask3]
+    print (overlap3)
+RNA[RNA['Gene_Name'] == 'SIPA1']
+peaks_name = ['HCT116_R2_q0.05_peak_11077']
+
+
+# selected_peak_genes = {}
+
+for peak_name in peaks_name:
+    overlap = pd.DataFrame([])
+    selected_genes = pd.DataFrame([])
+    peak = union_snp_peaks[union_snp_peaks['name'] == peak_name]
+    g = peak.iloc[0]['chr']
+    start = peak.iloc[0]['start']
+    end = peak.iloc[0]['end']
+    tmp_loops = loops[loops['chr1'] == g]
+    tmp_snps = SNPs[SNPs['CHR_ID'] == g.lstrip('chr')]
+    mask1 = (tmp_loops['start1'] <= end) & (tmp_loops['end1'] >= start)
+    mask2 = (tmp_loops['start2'] <= end) & (tmp_loops['end2'] >= start)
+    mask3 = (tmp_snps['CHR_POS'] >= start - 100) & (tmp_snps['CHR_POS'] <= end + 100)
+    overlap1 = tmp_loops[mask1]
+    overlap2 = tmp_loops[mask2]
+    overlap3 = tmp_snps[mask3]
+    print (overlap3)
+    if (len(overlap1) != 0):
+        overlap = pd.concat([overlap , overlap1])
+    if (len(overlap2) != 0):
+        overlap = pd.concat([overlap , overlap2])    
+    overlap = overlap.drop_duplicates()
+    # overlap.to_csv('H:\\work\\Postdoctoral\\GWAS疾病位点检测\\results\\HiRPC\\SNP_peaks_loops\\' + peak_name + '.bedpe' , header=None , index = None , sep = '\t')
+    
+    
+    for i in overlap.index:
+        g = overlap.loc[i]['chr1']
+        start1 = overlap.loc[i]['start1']
+        end1 = overlap.loc[i]['end1']
+        start2 = overlap.loc[i]['start2']
+        end2 = overlap.loc[i]['end2']
+        tmp_promoter = promoter[promoter['chr'] == g]
+        mask1 = (tmp_promoter['start'] <= end1) & (tmp_promoter['end'] >= start1)
+        mask2 = (tmp_promoter['start'] <= end2) & (tmp_promoter['end'] >= start2)
+        overlap1 = tmp_promoter[mask1]
+        overlap2 = tmp_promoter[mask2]
+        if len(overlap1) != 0:
+            # print (overlap1)
+            selected_genes = pd.concat([selected_genes , overlap1])
+        if len(overlap2) != 0:
+            # print (overlap2)
+            selected_genes = pd.concat([selected_genes , overlap2])
+    if len(selected_genes) != 0:
+        selected_genes = selected_genes.drop_duplicates()        
+        selected_genes = selected_genes.sort_values(by = 'FPKM' , ascending=False)        
+        # selected_genes = selected_genes[selected_genes['FPKM'] >= 10]
+        # gene_names = list(selected_genes['gene_name'])
+        # selected_peak_genes[peak_name] = gene_names
+        
+        
+        # print (selected_genes)
+        
+        
+        for i in list(selected_genes['gene_name']):
+            if i in CVD_genes:
+                print (peak_name , i)
+RNA[RNA['Gene_Name'] == 'SERPINH1']
+selected_genes
+RNA[RNA['Gene_Name'] == 'SERPINH1']
+peaks_name = list(union_snp_peaks['name'])
+for peak_name in peaks_name:
+    overlap = pd.DataFrame([])
+    selected_genes = pd.DataFrame([])
+    peak = union_snp_peaks[union_snp_peaks['name'] == peak_name]
+    g = peak.iloc[0]['chr']
+    start = peak.iloc[0]['start']
+    end = peak.iloc[0]['end']
+    tmp_loops = loops[loops['chr1'] == g]
+    tmp_snps = SNPs[SNPs['CHR_ID'] == g.lstrip('chr')]
+    mask1 = (tmp_loops['start1'] <= end) & (tmp_loops['end1'] >= start)
+    mask2 = (tmp_loops['start2'] <= end) & (tmp_loops['end2'] >= start)
+    mask3 = (tmp_snps['CHR_POS'] >= start - 100) & (tmp_snps['CHR_POS'] <= end + 100)
+    overlap1 = tmp_loops[mask1]
+    overlap2 = tmp_loops[mask2]
+    overlap3 = tmp_snps[mask3]
+    # print (overlap3)
+    if (len(overlap1) != 0):
+        overlap = pd.concat([overlap , overlap1])
+    if (len(overlap2) != 0):
+        overlap = pd.concat([overlap , overlap2])    
+    overlap = overlap.drop_duplicates()
+    # overlap.to_csv('H:\\work\\Postdoctoral\\GWAS疾病位点检测\\results\\HiRPC\\SNP_peaks_loops\\' + peak_name + '.bedpe' , header=None , index = None , sep = '\t')
+    
+    
+    for i in overlap.index:
+        g = overlap.loc[i]['chr1']
+        start1 = overlap.loc[i]['start1']
+        end1 = overlap.loc[i]['end1']
+        start2 = overlap.loc[i]['start2']
+        end2 = overlap.loc[i]['end2']
+        tmp_promoter = promoter[promoter['chr'] == g]
+        mask1 = (tmp_promoter['start'] <= end1) & (tmp_promoter['end'] >= start1)
+        mask2 = (tmp_promoter['start'] <= end2) & (tmp_promoter['end'] >= start2)
+        overlap1 = tmp_promoter[mask1]
+        overlap2 = tmp_promoter[mask2]
+        if len(overlap1) != 0:
+            # print (overlap1)
+            selected_genes = pd.concat([selected_genes , overlap1])
+        if len(overlap2) != 0:
+            # print (overlap2)
+            selected_genes = pd.concat([selected_genes , overlap2])
+    if len(selected_genes) != 0:
+        selected_genes = selected_genes.drop_duplicates()        
+        selected_genes = selected_genes.sort_values(by = 'FPKM' , ascending=False)        
+        # selected_genes = selected_genes[selected_genes['FPKM'] >= 10]
+        # gene_names = list(selected_genes['gene_name'])
+        # selected_peak_genes[peak_name] = gene_names
+        
+        
+        # print (selected_genes)
+        
+        
+        for i in list(selected_genes['gene_name']):
+            if i in CVD_genes:
+                print (peak_name , i)
+peaks_name = ['HCT116_R2_q0.05_peak_13505']
+
+
+# selected_peak_genes = {}
+
+for peak_name in peaks_name:
+    overlap = pd.DataFrame([])
+    selected_genes = pd.DataFrame([])
+    peak = union_snp_peaks[union_snp_peaks['name'] == peak_name]
+    g = peak.iloc[0]['chr']
+    start = peak.iloc[0]['start']
+    end = peak.iloc[0]['end']
+    tmp_loops = loops[loops['chr1'] == g]
+    tmp_snps = SNPs[SNPs['CHR_ID'] == g.lstrip('chr')]
+    mask1 = (tmp_loops['start1'] <= end) & (tmp_loops['end1'] >= start)
+    mask2 = (tmp_loops['start2'] <= end) & (tmp_loops['end2'] >= start)
+    mask3 = (tmp_snps['CHR_POS'] >= start - 100) & (tmp_snps['CHR_POS'] <= end + 100)
+    overlap1 = tmp_loops[mask1]
+    overlap2 = tmp_loops[mask2]
+    overlap3 = tmp_snps[mask3]
+    print (overlap3)
+    if (len(overlap1) != 0):
+        overlap = pd.concat([overlap , overlap1])
+    if (len(overlap2) != 0):
+        overlap = pd.concat([overlap , overlap2])    
+    overlap = overlap.drop_duplicates()
+    # overlap.to_csv('H:\\work\\Postdoctoral\\GWAS疾病位点检测\\results\\HiRPC\\SNP_peaks_loops\\' + peak_name + '.bedpe' , header=None , index = None , sep = '\t')
+    
+    
+    for i in overlap.index:
+        g = overlap.loc[i]['chr1']
+        start1 = overlap.loc[i]['start1']
+        end1 = overlap.loc[i]['end1']
+        start2 = overlap.loc[i]['start2']
+        end2 = overlap.loc[i]['end2']
+        tmp_promoter = promoter[promoter['chr'] == g]
+        mask1 = (tmp_promoter['start'] <= end1) & (tmp_promoter['end'] >= start1)
+        mask2 = (tmp_promoter['start'] <= end2) & (tmp_promoter['end'] >= start2)
+        overlap1 = tmp_promoter[mask1]
+        overlap2 = tmp_promoter[mask2]
+        if len(overlap1) != 0:
+            # print (overlap1)
+            selected_genes = pd.concat([selected_genes , overlap1])
+        if len(overlap2) != 0:
+            # print (overlap2)
+            selected_genes = pd.concat([selected_genes , overlap2])
+    if len(selected_genes) != 0:
+        selected_genes = selected_genes.drop_duplicates()        
+        selected_genes = selected_genes.sort_values(by = 'FPKM' , ascending=False)        
+        # selected_genes = selected_genes[selected_genes['FPKM'] >= 10]
+        # gene_names = list(selected_genes['gene_name'])
+        # selected_peak_genes[peak_name] = gene_names
+        
+        
+        # print (selected_genes)
+        
+        
+        for i in list(selected_genes['gene_name']):
+            if i in CVD_genes:
+                print (peak_name , i)
+RNA[RNA['Gene_Name'] == 'LRP1']
+selected_genes
+peaks_name = ['HCT116_R2_q0.05_peak_14557']
+
+
+# selected_peak_genes = {}
+
+for peak_name in peaks_name:
+    overlap = pd.DataFrame([])
+    selected_genes = pd.DataFrame([])
+    peak = union_snp_peaks[union_snp_peaks['name'] == peak_name]
+    g = peak.iloc[0]['chr']
+    start = peak.iloc[0]['start']
+    end = peak.iloc[0]['end']
+    tmp_loops = loops[loops['chr1'] == g]
+    tmp_snps = SNPs[SNPs['CHR_ID'] == g.lstrip('chr')]
+    mask1 = (tmp_loops['start1'] <= end) & (tmp_loops['end1'] >= start)
+    mask2 = (tmp_loops['start2'] <= end) & (tmp_loops['end2'] >= start)
+    mask3 = (tmp_snps['CHR_POS'] >= start - 100) & (tmp_snps['CHR_POS'] <= end + 100)
+    overlap1 = tmp_loops[mask1]
+    overlap2 = tmp_loops[mask2]
+    overlap3 = tmp_snps[mask3]
+    print (overlap3)
+    if (len(overlap1) != 0):
+        overlap = pd.concat([overlap , overlap1])
+    if (len(overlap2) != 0):
+        overlap = pd.concat([overlap , overlap2])    
+    overlap = overlap.drop_duplicates()
+    # overlap.to_csv('H:\\work\\Postdoctoral\\GWAS疾病位点检测\\results\\HiRPC\\SNP_peaks_loops\\' + peak_name + '.bedpe' , header=None , index = None , sep = '\t')
+    
+    
+    for i in overlap.index:
+        g = overlap.loc[i]['chr1']
+        start1 = overlap.loc[i]['start1']
+        end1 = overlap.loc[i]['end1']
+        start2 = overlap.loc[i]['start2']
+        end2 = overlap.loc[i]['end2']
+        tmp_promoter = promoter[promoter['chr'] == g]
+        mask1 = (tmp_promoter['start'] <= end1) & (tmp_promoter['end'] >= start1)
+        mask2 = (tmp_promoter['start'] <= end2) & (tmp_promoter['end'] >= start2)
+        overlap1 = tmp_promoter[mask1]
+        overlap2 = tmp_promoter[mask2]
+        if len(overlap1) != 0:
+            # print (overlap1)
+            selected_genes = pd.concat([selected_genes , overlap1])
+        if len(overlap2) != 0:
+            # print (overlap2)
+            selected_genes = pd.concat([selected_genes , overlap2])
+    if len(selected_genes) != 0:
+        selected_genes = selected_genes.drop_duplicates()        
+        selected_genes = selected_genes.sort_values(by = 'FPKM' , ascending=False)        
+        # selected_genes = selected_genes[selected_genes['FPKM'] >= 10]
+        # gene_names = list(selected_genes['gene_name'])
+        # selected_peak_genes[peak_name] = gene_names
+        
+        
+        # print (selected_genes)
+        
+        
+        for i in list(selected_genes['gene_name']):
+            if i in CVD_genes:
+                print (peak_name , i)
+selected_genes
+RNA[RNA['Gene_Name'] == 'SH2B3']
+RNA[RNA['Gene_Name'] == 'YY1']
+from __future__ import division
+import numpy as np
+import matplotlib.pyplot as plt
+from matplotlib.backends.backend_pdf import PdfPages
+from matplotlib_venn import venn2, venn2_circles
+import pandas as pd
+import os
+import pandas as pd 
+import matplotlib
+
+
+
+def run_Plot(fig , OutFile):
+    pp = PdfPages(OutFile)
+    pp.savefig(fig)
+    pp.close()
+
+
+def Load_peaks(file , peaks_type):
+    sz = os.path.getsize(file)
+    if sz != 0:
+        peaks = pd.read_table(file , header = None)
+        if peaks_type == 'narrow':
+            peaks.columns = ['chr' , 'start' , 'end' , 'name' , 'score' , 'strand' , 'signal' , 'pvalue' , 'qvalue' , 'lengtn']
+        else:
+            peaks.columns = ['chr' , 'start' , 'end' , 'name' , 'score' , 'strand' , 'signal' , 'pvalue' , 'qvalue']
+    else:
+        peaks = []
+    
+    return peaks
+
+def Common_peaks(peaks1 , peaks2):
+    n = 0 ; common = []
+    chrom = ['chr' + str(x) for x in range(1 , 23)] + ['chrX']
+    
+    for g in chrom:
+        tmp1 = peaks1[peaks1['chr'] == g]
+        tmp2 = peaks2[peaks2['chr'] == g]
+        for i in tmp1.index:
+            start = tmp1.loc[i]['start']
+            end = tmp1.loc[i]['end']
+            mask = (tmp2['start'] <= end) & (tmp2['end'] >= start)
+            overlap = tmp2[mask]
+            if overlap.size != 0:
+                n += 1
+                c = tuple(pd.concat([tmp1.loc[i] , overlap.iloc[0]] , axis = 0))
+                common.append(c)
+    print (n)
+    common = pd.DataFrame(common)
+    
+    return common
+
+
+def Common_peaks3(peaks1 , peaks2 , peaks3):
+    n = 0 ; common = []
+    chrom = ['chr' + str(x) for x in range(1 , 23)] + ['chrX']
+    
+    for g in chrom:
+        tmp1 = peaks1[peaks1['chr'] == g]
+        tmp2 = peaks2[peaks2['chr'] == g]
+        for i in tmp1.index:
+            start = tmp1.loc[i]['start']
+            end = tmp1.loc[i]['end']
+            mask = (tmp2['start'] <= end) & (tmp2['end'] >= start)
+            overlap = tmp2[mask]
+            if overlap.size != 0:
+                n += 1
+                c = tuple(pd.concat([tmp1.loc[i] , overlap.iloc[0]] , axis = 0))
+                common.append(c)
+    
+    common = pd.DataFrame(common)
+    common = common.iloc[:,:10]
+    common.columns = peaks1.columns
+    common_1 = Common_peaks(common , peaks3)
+    
+    return common_1
+
+
+
+
+def union_peaks(peaks1 , peaks2):
+    union = peaks2.copy()
+    chrom = ['chr' + str(x) for x in range(1 , 23)] + ['chrX']
+    
+    for g in chrom:
+        tmp1 = peaks1[peaks1['chr'] == g]
+        tmp2 = peaks2[peaks2['chr'] == g]
+        for i in tmp1.index:
+            start = tmp1.loc[i]['start']
+            end = tmp1.loc[i]['end']
+            mask = (tmp2['start'] <= end) & (tmp2['end'] >= start)
+            overlap = tmp2[mask]
+            if len(overlap) != 0:
+                pass
+            else:
+                union = pd.concat([union , tmp1.loc[[i]]] , axis = 0)
+    
+    
+    union = union.drop_duplicates(subset=['chr','start','end'],keep='first')
+    union = union.sort_values(by=['chr','start','end'])
+    union = union.reset_index(drop=True)
+    union = union[union['chr'].isin(chrom)]
+    print (len(union))
+    return union
+
+"""
+Created on Mon Sep 18 00:10:11 2023
+
+@author: lenovo
+"""
+
+from __future__ import division
+import numpy as np
+import matplotlib.pyplot as plt
+from matplotlib.backends.backend_pdf import PdfPages
+from matplotlib_venn import venn2, venn2_circles
+from matplotlib_venn import venn3, venn3_circles
+import pandas as pd
+import os
+import pandas as pd
+from __future__ import division
+import numpy as np
+import matplotlib.pyplot as plt
+from matplotlib.backends.backend_pdf import PdfPages
+from matplotlib_venn import venn2, venn2_circles
+from matplotlib_venn import venn3, venn3_circles
+import pandas as pd
+import os
+import pandas as pd 
+import matplotlib
+set1 = {1, 2, 3, 4}
+set2 = {3, 4, 5, 6}
+set3 = {4, 5, 6, 7, 8}
+
+# 创建集合的 Venn 图
+venn3([set1, set2, set3], ('Set1', 'Set2', 'Set3'))
+
+# 显示图形
+plt.show()
+venn3([set1, set2, set3], ('Set1', 'Set2', 'Set3'))
+fig = plt.figure(figsize = (10, 10))venn3([set1, set2, set3], ('Set1', 'Set2', 'Set3'))
+fig = plt.figure(figsize = (10, 10))
+venn3([set1, set2, set3], ('Set1', 'Set2', 'Set3'))
+fig = plt.figure(figsize = (10, 10))
+venn3([set1, set2, set3], ('Set1', 'Set2', 'Set3'))
+fig = plt.figure(figsize = (10, 10))
+venn3([set1, set2, set3], ('Set1', 'Set2', 'Set3'))
+import matplotlib.pyplot as plt
+from matplotlib_venn import venn3
+
+# 设置三个集合的大小和它们之间的交集大小
+subsets = (3, 3, 1, 4, 1, 2, 1)  # 分别表示 a, b, c, d, e, f, g
+
+# 创建集合的 Venn 图
+venn3(subsets=subsets, set_labels=('Set1', 'Set2', 'Set3'))
+
+# 显示图形
+plt.show()
+fig = plt.figure(figsize = (10, 10))
+venn3(subsets=subsets, set_labels=('Set1', 'Set2', 'Set3'))
+peaks1 = Load_peaks('H:\\work\\niulongjian\\HiRPC_processed_data\\K562\\K562_HiRPC_0.1FA\\one-dimensional\\peaks\\K562_0.1FA_onedimensional_q0.05_union_peaks.narrowPeak' , 'narrow')
+peaks2 = Load_peaks('H:\\work\\literature_data\\K562\\ChIA-PET\\hg38\\K562_RNAPII_ChIA-PET_ENCFF849BSC.broadPeak' , 'broad')
+peaks3 = Load_peaks('H:\\work\\literature_data\\K562\\HiChIP\\one-dimensional\\K562_HiChIP_onedimensional_q0.05_union2_peaks.narrowPeak' , 'narrow')
+peaks1
+peaks2
+peaks3
+peaks1 = Load_peaks('H:\\work\\niulongjian\\HiRPC_processed_data\\K562\\K562_HiRPC_0.1FA\\one-dimensional\\peaks\\K562_0.1FA_onedimensional_q0.05_union_peaks.narrowPeak' , 'narrow')
+peaks2 = Load_peaks('H:\\work\\literature_data\\K562\\ChIA-PET\\hg38\\K562_RNAPII_ChIA-PET_ENCFF849BSC.broadPeak' , 'broad')
+peaks3 = Load_peaks('H:\\work\\literature_data\\K562\\HiChIP\\one-dimensional\\K562_HiChIP_onedimensional_q0.05_union2_peaks.narrowPeak' , 'narrow')
+peaks1 = Load_peaks('H:\\work\\niulongjian\\HiRPC_processed_data\\K562\\K562_HiRPC_0.1FA\\one-dimensional\\peaks\\K562_0.1FA_onedimensional_q0.05_union_peaks.narrowPeak' , 'narrow')
+peaks2 = Load_peaks('H:\\work\\literature_data\\K562\\ChIA-PET\\hg38\\K562_RNAPII_ChIA-PET_ENCFF849BSC.broadPeak' , 'broad')
+peaks3 = Load_peaks('H:\\work\\literature_data\\K562\\HiChIP\\one-dimensional\\K562_HiChIP_onedimensional_q0.05_union2_peaks.narrowPeak' , 'narrow')
+
+common12 = Common_peaks(peaks1 , peaks2)
+common13 = Common_peaks(peaks1 , peaks3)
+common23 = Common_peaks(peaks2 , peaks3)
+common123 = Common_peaks3(peaks1, peaks2, peaks3)
+def Common_peaks(peaks1 , peaks2):
+    n = 0 ; common = [] ; speci_1 = []
+    chrom = ['chr' + str(x) for x in range(1 , 23)] + ['chrX']
+    
+    for g in chrom:
+        tmp1 = peaks1[peaks1['chr'] == g]
+        tmp2 = peaks2[peaks2['chr'] == g]
+        for i in tmp1.index:
+            start = tmp1.loc[i]['start']
+            end = tmp1.loc[i]['end']
+            mask = (tmp2['start'] <= end) & (tmp2['end'] >= start)
+            overlap = tmp2[mask]
+            if overlap.size != 0:
+                n += 1
+                c = tuple(pd.concat([tmp1.loc[i] , overlap.iloc[0]] , axis = 0))
+                common.append(c)
+            else:
+                speci_1.append(tuple(tmp1.loc[i]))
+    
+    print (n)
+    common = pd.DataFrame(common)
+    speci_1 = pd.DataFrame(speci_1)
+    
+    return common , speci_1
+def Common_peaks_speci1(peaks1 , peaks2):
+    n = 0 ; common = [] ; speci_1 = []
+    chrom = ['chr' + str(x) for x in range(1 , 23)] + ['chrX']
+    
+    for g in chrom:
+        tmp1 = peaks1[peaks1['chr'] == g]
+        tmp2 = peaks2[peaks2['chr'] == g]
+        for i in tmp1.index:
+            start = tmp1.loc[i]['start']
+            end = tmp1.loc[i]['end']
+            mask = (tmp2['start'] <= end) & (tmp2['end'] >= start)
+            overlap = tmp2[mask]
+            if overlap.size != 0:
+                n += 1
+                c = tuple(pd.concat([tmp1.loc[i] , overlap.iloc[0]] , axis = 0))
+                common.append(c)
+            else:
+                speci_1.append(tuple(tmp1.loc[i]))
+    
+    print (n)
+    common = pd.DataFrame(common)
+    speci_1 = pd.DataFrame(speci_1)
+    
+    return common , speci_1
+common12 , Ab = Common_peaks_speci1(peaks1 , peaks2)
+ABC = Common_peaks3(peaks1, peaks2, peaks3)
+AB , Ab = Common_peaks_speci1(peaks1 , peaks2)
+AB
+Ab
+AbC , Abc = Common_peaks_speci1(Ab , peaks3)
+peaks1 = pd.read_table('H:\\work\\niulongjian\\HiRPC_processed_data\\K562\\K562_HiRPC_0.1FA\\one-dimensional\\peaks\\K562_0.1FA_onedimensional_q0.05_union_peaks.narrowPeak' , usecols=(0 , 1 , 2) , header = None)
+peaks1
+
+import numpy as np
+import pandas as pd
+from itertools import islice
+def Load_gtf(gtfil):
+    gtf_type = np.dtype({'names':['gene_id' , 'gene_name' , 'chr' , 'strand' , 'start' , 'end'],
+                     'formats':['U64' , 'U64' , 'U8' , 'U4' , np.int64 , np.int64]})
+    gtf = open(gtfil , 'r')
+    gtf_1 = []
+    for i in islice(gtf , 0 , None):
+        a = i.strip().split()
+        if a[2] == 'CDS':
+            gene_id = i.strip().split('\"')[1]
+            gene_name = i.split('gene_name "')[1].split('\"')[0]
+            chro = a[0]
+            strand = a[6]
+            start = a[3]
+            end = a[4]
+            gtf_1.append((gene_id , gene_name , chro , strand , start , end))
+    gtf = np.array(gtf_1 , dtype = gtf_type)
+    return gtf
+
+
+
+def read_genome(filename):
+    file_genome = open(filename)
+    dict_genome = {}
+    for line in file_genome:
+        line = line.strip('\n')
+        lists = list(line)
+        if len(lists) > 1 and lists[0] == '>' :
+            chrs = (line.split('>')[1]).split()[0]
+            dict_genome[chrs] = []
+        
+        else :
+            dict_genome[chrs].extend(lists)
+    return dict_genome
+def write_pos_to_seq(CDS , outfil):
+    
+    out = open(outfil , 'w')
+    
+    for i in CDS:
+        out.writelines('>' + i + '_CDS' + '\n')
+        for j in range(len(CDS[i]) // 70 + 1):
+            n1 = j * 70
+            n2 = (j + 1) * 70
+            out.writelines(''.join(CDS[i][n1 : n2]).upper() + '\n')
+    out.close()
+def merge_intervals(intervals):
+    if not intervals:
+        return []
+    
+    # 先按照区间的开始时间排序
+    intervals.sort(key=lambda x: x[0])
+    
+    merged = [intervals[0]]
+    for current in intervals:
+        last = merged[-1]
+        if current[0] <= last[1]:  # 如果当前区间的开始时间小于等于最后一个合并区间的结束时间
+            # 合并区间
+            merged[-1] = (last[0], max(last[1], current[1]))
+        else:
+            # 不重叠的区间，直接添加到结果列表中
+            merged.append(current)
+    
+    return merged
+gtf = Load_gtf('H:\\work\\literature_data\\genome\\hg38\\UCSC\\hg38.ncbiRefSeq.gtf\\hg38.ncbiRefSeq.gtf')
+
+genome_h38 = read_genome('H:\\work\\literature_data\\genome\\hg38\\hg38.fa')
+gtf = Load_gtf('H:\\work\\literature_data\\genome\\hg38\\UCSC\\hg38.ncbiRefSeq.gtf\\hg38.ncbiRefSeq.gtf')
+
+genome_h38 = read_genome('H:\\work\\literature_data\\genome\\hg38\\hg38.fa')
+import numpy as np
+import pandas as pd
+from itertools import islice
+
+
+def Load_gtf(gtfil):
+    gtf_type = np.dtype({'names':['gene_id' , 'gene_name' , 'chr' , 'strand' , 'start' , 'end'],
+                     'formats':['U64' , 'U64' , 'U8' , 'U4' , np.int64 , np.int64]})
+    gtf = open(gtfil , 'r')
+    gtf_1 = []
+    for i in islice(gtf , 0 , None):
+        a = i.strip().split()
+        if a[2] == 'CDS':
+            gene_id = i.strip().split('\"')[1]
+            gene_name = i.split('gene_name "')[1].split('\"')[0]
+            chro = a[0]
+            strand = a[6]
+            start = a[3]
+            end = a[4]
+            gtf_1.append((gene_id , gene_name , chro , strand , start , end))
+    gtf = np.array(gtf_1 , dtype = gtf_type)
+    return gtf
+
+
+
+def read_genome(filename):
+    file_genome = open(filename)
+    dict_genome = {}
+    for line in file_genome:
+        line = line.strip('\n')
+        lists = list(line)
+        if len(lists) > 1 and lists[0] == '>' :
+            chrs = (line.split('>')[1]).split()[0]
+            dict_genome[chrs] = []
+        
+        else :
+            dict_genome[chrs].extend(lists)
+    return dict_genome
+
+
+
+
+
+def write_pos_to_seq(CDS , outfil):
+    
+    out = open(outfil , 'w')
+    
+    for i in CDS:
+        out.writelines('>' + i + '_CDS' + '\n')
+        for j in range(len(CDS[i]) // 70 + 1):
+            n1 = j * 70
+            n2 = (j + 1) * 70
+            out.writelines(''.join(CDS[i][n1 : n2]).upper() + '\n')
+    out.close()
+
+
+
+
+
+def merge_intervals(intervals):
+    if not intervals:
+        return []
+    
+    # 先按照区间的开始时间排序
+    intervals.sort(key=lambda x: x[0])
+    
+    merged = [intervals[0]]
+    for current in intervals:
+        last = merged[-1]
+        if current[0] <= last[1]:  # 如果当前区间的开始时间小于等于最后一个合并区间的结束时间
+            # 合并区间
+            merged[-1] = (last[0], max(last[1], current[1]))
+        else:
+            # 不重叠的区间，直接添加到结果列表中
+            merged.append(current)
+    
+    return merged
+
+gtf = Load_gtf('H:\\work\\literature_data\\genome\\hg38\\UCSC\\hg38.ncbiRefSeq.gtf\\hg38.ncbiRefSeq.gtf')
+
+genome_h38 = read_genome('H:\\work\\literature_data\\genome\\hg38\\hg38.fa')
+
+## ---(Mon Jul  1 16:53:46 2024)---
+import numpy as np
+import pandas as pd
+from itertools import islice
+
+
+def Load_gtf(gtfil):
+    gtf_type = np.dtype({'names':['gene_id' , 'gene_name' , 'chr' , 'strand' , 'start' , 'end'],
+                     'formats':['U64' , 'U64' , 'U8' , 'U4' , np.int64 , np.int64]})
+    gtf = open(gtfil , 'r')
+    gtf_1 = []
+    for i in islice(gtf , 0 , None):
+        a = i.strip().split()
+        if a[2] == 'CDS':
+            gene_id = i.strip().split('\"')[1]
+            gene_name = i.split('gene_name "')[1].split('\"')[0]
+            chro = a[0]
+            strand = a[6]
+            start = a[3]
+            end = a[4]
+            gtf_1.append((gene_id , gene_name , chro , strand , start , end))
+    gtf = np.array(gtf_1 , dtype = gtf_type)
+    return gtf
+
+
+
+def read_genome(filename):
+    file_genome = open(filename)
+    dict_genome = {}
+    for line in file_genome:
+        line = line.strip('\n')
+        lists = list(line)
+        if len(lists) > 1 and lists[0] == '>' :
+            chrs = (line.split('>')[1]).split()[0]
+            dict_genome[chrs] = []
+        
+        else :
+            dict_genome[chrs].extend(lists)
+    return dict_genome
+
+
+
+
+
+def write_pos_to_seq(CDS , outfil):
+    
+    out = open(outfil , 'w')
+    
+    for i in CDS:
+        out.writelines('>' + i + '_CDS' + '\n')
+        for j in range(len(CDS[i]) // 70 + 1):
+            n1 = j * 70
+            n2 = (j + 1) * 70
+            out.writelines(''.join(CDS[i][n1 : n2]).upper() + '\n')
+    out.close()
+
+
+
+
+
+def merge_intervals(intervals):
+    if not intervals:
+        return []
+    
+    # 先按照区间的开始时间排序
+    intervals.sort(key=lambda x: x[0])
+    
+    merged = [intervals[0]]
+    for current in intervals:
+        last = merged[-1]
+        if current[0] <= last[1]:  # 如果当前区间的开始时间小于等于最后一个合并区间的结束时间
+            # 合并区间
+            merged[-1] = (last[0], max(last[1], current[1]))
+        else:
+            # 不重叠的区间，直接添加到结果列表中
+            merged.append(current)
+    
+    return merged
+gtf = Load_gtf('H:\\work\\literature_data\\genome\\hg38\\UCSC\\hg38.ncbiRefSeq.gtf\\hg38.ncbiRefSeq.gtf')
+
+genome_h38 = read_genome('H:\\work\\literature_data\\genome\\hg38\\hg38.fa')
+gtf
+gtf[gtf['gene_name'] == 'PCSK9' ] 
+RNA
+RNA = pd.read_csv('H:\\work\\niulongjian\\HiRPC_processed_data\\K562_HCT116_RNA-seq\\FPKM\\union_all_FPKM.csv' , header = 0)
+RNA[RNA['Gene_Name'] == 'PCSK9']
+RNA[RNA['Gene_Name'] == 'PCSK9']['start']
+RNA[RNA['Gene_Name'] == 'PCSK9']
+RNA.columns
+RNA[RNA['Gene_Name'] == 'PCSK9']['Start']
+RNA[RNA['Gene_Name'] == 'PCSK9']['End']
+RNA = pd.read_csv('H:\\work\\niulongjian\\HiRPC_processed_data\\K562_HCT116_RNA-seq\\FPKM\\union_all_FPKM.csv' , header = 0)
+RNA
+PSCK9 = RNA[RNA['Gene_Name'] == 'PCSK9']
+PCSK9
+
+PCSK9 = RNA[RNA['Gene_Name'] == 'PCSK9']
+PCSK9
+PCSK9['Start']
+PCSK9['End']
+PCSK9['Chr']
+from __future__ import division
+import numpy as np
+import matplotlib.pyplot as plt
+from matplotlib.backends.backend_pdf import PdfPages
+from matplotlib_venn import venn2, venn2_circles
+import pandas as pd
+import os
+import pandas as pd 
+import matplotlib
+
+
+
+def run_Plot(fig , OutFile):
+    pp = PdfPages(OutFile)
+    pp.savefig(fig)
+    pp.close()
+
+
+def Load_peaks(file , peaks_type):
+    sz = os.path.getsize(file)
+    if sz != 0:
+        peaks = pd.read_table(file , header = None)
+        if peaks_type == 'narrow':
+            peaks.columns = ['chr' , 'start' , 'end' , 'name' , 'score' , 'strand' , 'signal' , 'pvalue' , 'qvalue' , 'lengtn']
+        else:
+            peaks.columns = ['chr' , 'start' , 'end' , 'name' , 'score' , 'strand' , 'signal' , 'pvalue' , 'qvalue']
+    else:
+        peaks = []
+    
+    return peaks
+
+def Common_peaks(peaks1 , peaks2):
+    n = 0 ; common = []
+    chrom = ['chr' + str(x) for x in range(1 , 23)] + ['chrX']
+    
+    for g in chrom:
+        tmp1 = peaks1[peaks1['chr'] == g]
+        tmp2 = peaks2[peaks2['chr'] == g]
+        for i in tmp1.index:
+            start = tmp1.loc[i]['start']
+            end = tmp1.loc[i]['end']
+            mask = (tmp2['start'] <= end) & (tmp2['end'] >= start)
+            overlap = tmp2[mask]
+            if overlap.size != 0:
+                n += 1
+                c = tuple(pd.concat([tmp1.loc[i] , overlap.iloc[0]] , axis = 0))
+                common.append(c)
+    print (n)
+    common = pd.DataFrame(common)
+    
+    return common
+
+
+def Common_peaks3(peaks1 , peaks2 , peaks3):
+    n = 0 ; common = []
+    chrom = ['chr' + str(x) for x in range(1 , 23)] + ['chrX']
+    
+    for g in chrom:
+        tmp1 = peaks1[peaks1['chr'] == g]
+        tmp2 = peaks2[peaks2['chr'] == g]
+        for i in tmp1.index:
+            start = tmp1.loc[i]['start']
+            end = tmp1.loc[i]['end']
+            mask = (tmp2['start'] <= end) & (tmp2['end'] >= start)
+            overlap = tmp2[mask]
+            if overlap.size != 0:
+                n += 1
+                c = tuple(pd.concat([tmp1.loc[i] , overlap.iloc[0]] , axis = 0))
+                common.append(c)
+    
+    common = pd.DataFrame(common)
+    common = common.iloc[:,:10]
+    common.columns = peaks1.columns
+    common_1 = Common_peaks(common , peaks3)
+    
+    return common_1
+
+
+
+
+def union_peaks(peaks1 , peaks2):
+    union = peaks2.copy()
+    chrom = ['chr' + str(x) for x in range(1 , 23)] + ['chrX']
+    
+    for g in chrom:
+        tmp1 = peaks1[peaks1['chr'] == g]
+        tmp2 = peaks2[peaks2['chr'] == g]
+        for i in tmp1.index:
+            start = tmp1.loc[i]['start']
+            end = tmp1.loc[i]['end']
+            mask = (tmp2['start'] <= end) & (tmp2['end'] >= start)
+            overlap = tmp2[mask]
+            if len(overlap) != 0:
+                pass
+            else:
+                union = pd.concat([union , tmp1.loc[[i]]] , axis = 0)
+    
+    
+    union = union.drop_duplicates(subset=['chr','start','end'],keep='first')
+    union = union.sort_values(by=['chr','start','end'])
+    union = union.reset_index(drop=True)
+    union = union[union['chr'].isin(chrom)]
+    print (len(union))
+    return union
+peaks1 = Load_peaks('H:\\work\\niulongjian\\HiRPC_processed_data\\K562\\K562_HiRPC_0.1FA\\one-dimensional\\peaks\\K562_0.1FA_onedimensional_q0.05_union_peaks.narrowPeak' , 'narrow')
+peaks2 = Load_peaks('H:\\work\\literature_data\\K562\\ChIA-PET\\hg38\\K562_RNAPII_ChIA-PET_ENCFF849BSC.broadPeak' , 'broad')
+peaks3 = Load_peaks('H:\\work\\literature_data\\K562\\HiChIP\\one-dimensional\\K562_HiChIP_onedimensional_q0.05_union2_peaks.narrowPeak' , 'narrow')
+
+common12 = Common_peaks(peaks1 , peaks2)
+common13 = Common_peaks(peaks1 , peaks3)
+common23 = Common_peaks(peaks2 , peaks3)
+PCSK9['Start']
+PCSK9['End']
+PCSK9['Strand']
+genome_h38.keys()
+PCSK9 = RNA[RNA['Gene_Name'] == 'PCSK9']
+
+g = str(PCSK9['Chr'])
+start = int(PCSK9['Start'])
+end = int(PCSK9['End'])
+g
+start
+end
+PCSK9
+PCSK9['Chr']
+strPCSK9['Chr']
+str(PCSK9['Chr'])
+PCSK9['Chr']
+PCSK9['Chr'].iloc[0]
+g = PCSK9['Chr'].iloc[0]
+start = PCSK9['Start'].iloc[0]
+g
+start
+RNA = pd.read_csv('H:\\work\\niulongjian\\HiRPC_processed_data\\K562_HCT116_RNA-seq\\FPKM\\union_all_FPKM.csv' , header = 0)
+
+PCSK9 = RNA[RNA['Gene_Name'] == 'PCSK9']
+
+g = PCSK9['Chr'].iloc[0]
+start = PCSK9['Start'].iloc[0] - 2000
+end = PCSK9['Start'].iloc[0] + 1000
+g
+start
+end
+PCSK9['Start'].iloc[0]
+PCSK9 = RNA[RNA['Gene_Name'] == 'PCSK9']
+
+g = PCSK9['Chr'].iloc[0]
+start = PCSK9['Start'].iloc[0] - 2000
+end = PCSK9['Start'].iloc[0] + 1000
+
+
+pro_pcsk9 = genome_h38[g][start:end]
+pro_pcsk9
+len(pro_pcsk9)
+
+def write_pos_to_seq(genome_h38 , g , start , end , outfil):
+    
+    out = open(outfil , 'w')
+    out.writelines('>' + g + ': ' + str(start) + '_' + str(end) + '\n')
+    seq = genome_h38[g][start:end]
+    
+    
+    for j in range(len(seq) // 70 + 1):
+            n1 = j * 70
+            n2 = (j + 1) * 70
+            out.writelines(''.join(seq[n1 : n2]).upper() + '\n')
+    out.close()
+
+write_pos_to_seq(genome_h38 , g , start , end , 'H:\\work\\Postdoctoral\\GWAS疾病位点检测\\results\\CAD\\first_6000\\Confirmation_Experiment\\PCSK9\\PCSK9_Tss_-2K_+1K.fa')
+import numpy as np
+import pandas as pd
+from itertools import islice
+
+
+def Load_gtf(gtfil):
+    gtf_type = np.dtype({'names':['gene_id' , 'gene_name' , 'chr' , 'strand' , 'start' , 'end'],
+                     'formats':['U64' , 'U64' , 'U8' , 'U4' , np.int64 , np.int64]})
+    gtf = open(gtfil , 'r')
+    gtf_1 = []
+    for i in islice(gtf , 0 , None):
+        a = i.strip().split()
+        if a[2] == 'CDS':
+            gene_id = i.strip().split('\"')[1]
+            gene_name = i.split('gene_name "')[1].split('\"')[0]
+            chro = a[0]
+            strand = a[6]
+            start = a[3]
+            end = a[4]
+            gtf_1.append((gene_id , gene_name , chro , strand , start , end))
+    gtf = np.array(gtf_1 , dtype = gtf_type)
+    return gtf
+
+
+def read_genome(filename):
+    file_genome = open(filename)
+    dict_genome = {}
+    for line in file_genome:
+        line = line.strip('\n')
+        lists = list(line)
+        if len(lists) > 1 and lists[0] == '>' :
+            chrs = (line.split('>')[1]).split()[0]
+            dict_genome[chrs] = []
+        
+        else :
+            dict_genome[chrs].extend(lists)
+    return dict_genome
+
+
+def write_pos_to_seq(CDS , outfil):
+    
+    out = open(outfil , 'w')
+    
+    for i in CDS:
+        out.writelines('>' + i + '_CDS' + '\n')
+        for j in range(len(CDS[i]) // 70 + 1):
+            n1 = j * 70
+            n2 = (j + 1) * 70
+            out.writelines(''.join(CDS[i][n1 : n2]).upper() + '\n')
+    out.close()
+
+def merge_intervals(intervals):
+    if not intervals:
+        return []
+    
+    # 先按照区间的开始时间排序
+    intervals.sort(key=lambda x: x[0])
+    
+    merged = [intervals[0]]
+    for current in intervals:
+        last = merged[-1]
+        if current[0] <= last[1]:  # 如果当前区间的开始时间小于等于最后一个合并区间的结束时间
+            # 合并区间
+            merged[-1] = (last[0], max(last[1], current[1]))
+        else:
+            # 不重叠的区间，直接添加到结果列表中
+            merged.append(current)
+    
+    return merged
+chrom = ['chr' + str(x) for x in range(1 , 23)] + ['chrX']
+
+
+RNA = pd.read_csv('H:\\work\\niulongjian\\HiRPC_processed_data\\K562_HCT116_RNA-seq\\FPKM\\union_all_FPKM.csv' , header = 0)
+
+RNA['HCT116_FPKM'] = (RNA['HCT116_WT_R1_FPKM'] + RNA['HCT116_WT_R2_FPKM']) / 2
+
+RNA = RNA.sort_values(by = ['HCT116_FPKM'] , ascending=False)
+
+RNA = RNA[RNA['Chr'] != 'chrM']
+
+
+
+
+loops = pd.read_table('H:\\work\\niulongjian\\HiRPC_processed_data\\HCT116\\HCT116_HiRPC_0.1FA\\loops\\HCT116_merged6_0.1FA.hg38_loops_two_anchors_binding_common_peaks.bedpe' , header = None)
+loops.columns = ['chr1' , 'start1' , 'end1' , 'chr2' , 'start2' , 'end2']
+
+
+peaks = pd.read_table('H:\\work\\niulongjian\\HiRPC_processed_data\\HCT116\\HCT116_HiRPC_0.1FA\\one-dimensional\\peaks\\HCT116_0.1FA_onedimensional_q0.05_union2_peaks.narrowPeak' , header = None , usecols=(0 , 1 , 2 , 3))
+peaks.columns = ['chr' , 'start' , 'end' , 'peak_name']
+union_snp_peaks 
+def Get_SNP_peaks(SNPs , peaks):
+    chrom = ['chr' + str(x) for x in range(1 , 23)] + ['chrX']
+    n = 0; tmp = pd.DataFrame()
+    for g in chrom:
+        tmp_snps = SNPs[SNPs['CHR_ID'] == g.lstrip('chr')]
+        tmp_peaks = peaks[peaks['chr'] == g]
+        
+        for i in tmp_snps.index:
+            pos = tmp_snps.loc[i]['CHR_POS']
+            
+            
+            overlap = tmp_peaks[(tmp_peaks['start'] <= pos + 100) & (tmp_peaks['end'] >= pos - 100)]
+            if len(overlap) != 0:
+                n += 1
+                tmp = pd.concat([tmp , overlap])
+    
+    
+    tmp = tmp.drop_duplicates()
+    return tmp
+def Load_peaks(file , peaks_type):
+    sz = os.path.getsize(file)
+    if sz != 0:
+        peaks = pd.read_table(file , header = None)
+        if peaks_type == 'narrow':
+            peaks.columns = ['chr' , 'start' , 'end' , 'name' , 'score' , 'strand' , 'signal' , 'pvalue' , 'qvalue' , 'lengtn']
+        else:
+            peaks.columns = ['chr' , 'start' , 'end' , 'name' , 'score' , 'strand' , 'signal' , 'pvalue' , 'qvalue']
+    else:
+        peaks = []
+    
+    return peaks
+
+
+def Get_SNP_peaks(SNPs , peaks):
+    chrom = ['chr' + str(x) for x in range(1 , 23)] + ['chrX']
+    n = 0; tmp = pd.DataFrame()
+    for g in chrom:
+        tmp_snps = SNPs[SNPs['CHR_ID'] == g.lstrip('chr')]
+        tmp_peaks = peaks[peaks['chr'] == g]
+        
+        for i in tmp_snps.index:
+            pos = tmp_snps.loc[i]['CHR_POS']
+            
+            
+            overlap = tmp_peaks[(tmp_peaks['start'] <= pos + 100) & (tmp_peaks['end'] >= pos - 100)]
+            if len(overlap) != 0:
+                n += 1
+                tmp = pd.concat([tmp , overlap])
+    
+    
+    tmp = tmp.drop_duplicates()
+    return tmp
+
+
+
+def Load_gtf(gtfil):
+    gtf_type = np.dtype({'names':['gene_id' , 'gene_name' , 'chr' , 'strand' , 'start' , 'end'],
+                     'formats':['U64' , 'U64' , 'U8' , 'U4' , np.int64 , np.int64]})
+    gtf = open(gtfil , 'r')
+    gtf_1 = []
+    for i in islice(gtf , 0 , None):
+        a = i.strip().split()
+        if a[2] == 'CDS':
+            gene_id = i.strip().split('\"')[1]
+            gene_name = i.split('gene_name "')[1].split('\"')[0]
+            chro = a[0]
+            strand = a[6]
+            start = a[3]
+            end = a[4]
+            gtf_1.append((gene_id , gene_name , chro , strand , start , end))
+    gtf = np.array(gtf_1 , dtype = gtf_type)
+    return gtf
+    
+def Load_peaks(file , peaks_type):
+    sz = os.path.getsize(file)
+    if sz != 0:
+        peaks = pd.read_table(file , header = None)
+        if peaks_type == 'narrow':
+            peaks.columns = ['chr' , 'start' , 'end' , 'name' , 'score' , 'strand' , 'signal' , 'pvalue' , 'qvalue' , 'lengtn']
+        else:
+            peaks.columns = ['chr' , 'start' , 'end' , 'name' , 'score' , 'strand' , 'signal' , 'pvalue' , 'qvalue']
+    else:
+        peaks = []
+    
+    return peaks
+
+
+def Get_SNP_peaks(SNPs , peaks):
+    chrom = ['chr' + str(x) for x in range(1 , 23)] + ['chrX']
+    n = 0; tmp = pd.DataFrame()
+    for g in chrom:
+        tmp_snps = SNPs[SNPs['CHR_ID'] == g.lstrip('chr')]
+        tmp_peaks = peaks[peaks['chr'] == g]
+        
+        for i in tmp_snps.index:
+            pos = tmp_snps.loc[i]['CHR_POS']
+            
+            
+            overlap = tmp_peaks[(tmp_peaks['start'] <= pos + 100) & (tmp_peaks['end'] >= pos - 100)]
+            if len(overlap) != 0:
+                n += 1
+                tmp = pd.concat([tmp , overlap])
+    
+    
+    tmp = tmp.drop_duplicates()
+    return tmp
+
+
+def read_genome(filename):
+    file_genome = open(filename)
+    dict_genome = {}
+    for line in file_genome:
+        line = line.strip('\n')
+        lists = list(line)
+        if len(lists) > 1 and lists[0] == '>' :
+            chrs = (line.split('>')[1]).split()[0]
+            dict_genome[chrs] = []
+        
+        else :
+            dict_genome[chrs].extend(lists)
+    return dict_genome
+
+
+def write_pos_to_seq(CDS , outfil):
+    
+    out = open(outfil , 'w')
+    
+    for i in CDS:
+        out.writelines('>' + i + '_CDS' + '\n')
+        for j in range(len(CDS[i]) // 70 + 1):
+            n1 = j * 70
+            n2 = (j + 1) * 70
+            out.writelines(''.join(CDS[i][n1 : n2]).upper() + '\n')
+    out.close()
+
+def merge_intervals(intervals):
+    if not intervals:
+        return []
+    
+    # 先按照区间的开始时间排序
+    intervals.sort(key=lambda x: x[0])
+    
+    merged = [intervals[0]]
+    for current in intervals:
+        last = merged[-1]
+        if current[0] <= last[1]:  # 如果当前区间的开始时间小于等于最后一个合并区间的结束时间
+            # 合并区间
+            merged[-1] = (last[0], max(last[1], current[1]))
+        else:
+            # 不重叠的区间，直接添加到结果列表中
+            merged.append(current)
+    
+    return merged
+SNPs = pd.read_csv('H:\\work\\Postdoctoral\\GWAS疾病位点检测\\results\\CAD\\first_6000\\CAD_related_SNPs_LD0.99_all_risk_allel_sort_seqname.csv' , header = 0)
+
+peaks_huvec = Load_peaks('H:\\work\\Postdoctoral\\GWAS疾病位点检测\\results\\HiRPC\\one-dimensional\\HUVEC_control_ls_onedimensional_q0.05_union2_peaks.narrowPeak', 'narrow')
+peaks_116 = Load_peaks('H:\\work\\niulongjian\\HiRPC_processed_data\\HCT116\\HCT116_HiRPC_0.1FA\\one-dimensional\\peaks\\HCT116_0.1FA_onedimensional_q0.05_union2_peaks.narrowPeak', 'narrow')
+
+
+
+
+huvec_snp_peaks = Get_SNP_peaks(SNPs , peaks_huvec)
+hct116_snp_peaks = Get_SNP_peaks(SNPs , peaks_116)
+union_snp_peaks = pd.concat([huvec_snp_peaks , hct116_snp_peaks])
+union_snp_peaks = union_snp_peaks.drop_duplicates()
+union_snp_peaks = union_snp_peaks.sort_values(by = ['chr' , 'start' , 'end'])
+union_snp_peaks
+peaks_name = ['HCT116_R2_q0.05_peak_2394']
+
+# selected_peak_genes = {}
+
+for peak_name in peaks_name:
+    overlap = pd.DataFrame([])
+    selected_genes = pd.DataFrame([])
+    peak = union_snp_peaks[union_snp_peaks['name'] == peak_name]
+    g = peak.iloc[0]['chr']
+    start = peak.iloc[0]['start']
+    end = peak.iloc[0]['end']
+    tmp_loops = loops[loops['chr1'] == g]
+    tmp_snps = SNPs[SNPs['CHR_ID'] == g.lstrip('chr')]
+    mask1 = (tmp_loops['start1'] <= end) & (tmp_loops['end1'] >= start)
+    mask2 = (tmp_loops['start2'] <= end) & (tmp_loops['end2'] >= start)
+    mask3 = (tmp_snps['CHR_POS'] >= start) & (tmp_snps['CHR_POS'] <= end)
+    overlap1 = tmp_loops[mask1]
+    overlap2 = tmp_loops[mask2]
+    overlap3 = tmp_snps[mask3]
+    print (overlap3)
+import os
+
+
+
+def Load_peaks(file , peaks_type):
+    sz = os.path.getsize(file)
+    if sz != 0:
+        peaks = pd.read_table(file , header = None)
+        if peaks_type == 'narrow':
+            peaks.columns = ['chr' , 'start' , 'end' , 'name' , 'score' , 'strand' , 'signal' , 'pvalue' , 'qvalue' , 'lengtn']
+        else:
+            peaks.columns = ['chr' , 'start' , 'end' , 'name' , 'score' , 'strand' , 'signal' , 'pvalue' , 'qvalue']
+    else:
+        peaks = []
+    
+    return peaks
+peaks_116 = Load_peaks('H:\\work\\niulongjian\\HiRPC_processed_data\\HCT116\\HCT116_HiRPC_0.1FA\\one-dimensional\\peaks\\HCT116_0.1FA_onedimensional_q0.05_union2_peaks.narrowPeak', 'narrow')
+peaks_116.columns
+peaks = peaks_116[peaks_116['name'] == 'HCT116_R2_q0.05_peak_2394']
+peaks
+peaks['end']
+peaks.iloc[0]['end']
+peaks.iloc[0]['end'] - peaks.iloc[0]['start']
+
+def write_pos_to_seq(genome_h38 , g , start , end , anno , outfil):
+    
+    out = open(outfil , 'w')
+    out.writelines('>' + g + ': ' + str(start) + '_' + str(end) + '_' + anno + '\n')
+    seq = genome_h38[g][start:end]
+    
+    
+    for j in range(len(seq) // 70 + 1):
+            n1 = j * 70
+            n2 = (j + 1) * 70
+            out.writelines(''.join(seq[n1 : n2]).upper() + '\n')
+    out.close()
+RNA = pd.read_csv('H:\\work\\niulongjian\\HiRPC_processed_data\\K562_HCT116_RNA-seq\\FPKM\\union_all_FPKM.csv' , header = 0)
+
+
+peaks_116 = Load_peaks('H:\\work\\niulongjian\\HiRPC_processed_data\\HCT116\\HCT116_HiRPC_0.1FA\\one-dimensional\\peaks\\HCT116_0.1FA_onedimensional_q0.05_union2_peaks.narrowPeak', 'narrow')
+
+
+
+################
+
+PCSK9 = RNA[RNA['Gene_Name'] == 'PCSK9']
+
+g = PCSK9['Chr'].iloc[0]
+start = PCSK9['Start'].iloc[0] - 2000
+end = PCSK9['Start'].iloc[0] + 1000
+write_pos_to_seq(genome_h38 , g , start , end , 'PCSK9_Tss_-2K_+1K' , 'H:\\work\\Postdoctoral\\GWAS疾病位点检测\\results\\CAD\\first_6000\\Confirmation_Experiment\\PCSK9\\PCSK9_Tss_-2K_+1K.fa')
+
+peaks = peaks_116[peaks_116['name'] == 'HCT116_R2_q0.05_peak_2394']
+
+peaks_g = peaks.iloc[0]['chr']
+peaks_s = peaks.iloc[0]['start'] - 1000
+peaks_e = peaks.iloc[0]['end'] + 1000
+
+
+write_pos_to_seq(genome_h38 , peaks_g , peaks_s , peaks_e , 'PCSK9_related_peaks_-1K_+1K_HCT116_R2_q0.05_peak_2394' , 'H:\\work\\Postdoctoral\\GWAS疾病位点检测\\results\\CAD\\first_6000\\Confirmation_Experiment\\PCSK9\\PCSK9_related_peaks_-1K_+1K_HCT116_R2_q0.05_peak_2394.fa')
+import numpy as np
+import pandas as pd
+from itertools import islice
+import os
+
+
+
+def Load_peaks(file , peaks_type):
+    sz = os.path.getsize(file)
+    if sz != 0:
+        peaks = pd.read_table(file , header = None)
+        if peaks_type == 'narrow':
+            peaks.columns = ['chr' , 'start' , 'end' , 'name' , 'score' , 'strand' , 'signal' , 'pvalue' , 'qvalue' , 'lengtn']
+        else:
+            peaks.columns = ['chr' , 'start' , 'end' , 'name' , 'score' , 'strand' , 'signal' , 'pvalue' , 'qvalue']
+    else:
+        peaks = []
+    
+    return peaks
+
+
+
+def read_genome(filename):
+    file_genome = open(filename)
+    dict_genome = {}
+    for line in file_genome:
+        line = line.strip('\n')
+        lists = list(line)
+        if len(lists) > 1 and lists[0] == '>' :
+            chrs = (line.split('>')[1]).split()[0]
+            dict_genome[chrs] = []
+        
+        else :
+            dict_genome[chrs].extend(lists)
+    return dict_genome
+
+
+
+
+
+def write_pos_to_seq(genome_h38 , g , start , end , anno , outfil):
+    
+    out = open(outfil , 'w')
+    out.writelines('>' + g + ': ' + str(start) + '_' + str(end) + '_' + anno + '\n')
+    seq = genome_h38[g][start:end]
+    
+    
+    for j in range(len(seq) // 70 + 1):
+            n1 = j * 70
+            n2 = (j + 1) * 70
+            out.writelines(''.join(seq[n1 : n2]).upper() + '\n')
+    out.close()
+RNA = pd.read_csv('H:\\work\\niulongjian\\HiRPC_processed_data\\K562_HCT116_RNA-seq\\FPKM\\union_all_FPKM.csv' , header = 0)
+
+
+peaks_116 = Load_peaks('H:\\work\\niulongjian\\HiRPC_processed_data\\HCT116\\HCT116_HiRPC_0.1FA\\one-dimensional\\peaks\\HCT116_0.1FA_onedimensional_q0.05_union2_peaks.narrowPeak', 'narrow')
+
+
+
+################
+
+PCSK9 = RNA[RNA['Gene_Name'] == 'PCSK9']
+
+g = PCSK9['Chr'].iloc[0]
+start = PCSK9['Start'].iloc[0] - 2000
+end = PCSK9['Start'].iloc[0] + 1000
+PCSK9['End'].iloc[0] - PCSK9['Start'].iloc[0]
+PCSK9_seq
+PCSK9
+genome_h38[g][start:end]
+genome_h38[g][start:end][:10]
+start
+end
+genome_h38[g][start+2000:end][:10]
+''.join(genome_h38[g][start+2000:end][:10])
+peaks_e - peaks_s
+''.join(genome_h38[g][peaks_s+1000:end][:10])
+peaks_name = list(union_snp_peaks['name'])
+
+RNA = pd.read_csv('H:\\work\\niulongjian\\HiRPC_processed_data\\K562_HCT116_RNA-seq\\FPKM\\union_all_FPKM.csv' , header = 0)
+
+RNA['HCT116_FPKM'] = (RNA['HCT116_WT_R1_FPKM'] + RNA['HCT116_WT_R2_FPKM']) / 2
+
+RNA = RNA.sort_values(by = ['HCT116_FPKM'] , ascending=False)
+
+RNA = RNA[RNA['Chr'] != 'chrM']
+loops = pd.read_table('H:\\work\\niulongjian\\HiRPC_processed_data\\HCT116\\HCT116_HiRPC_0.1FA\\loops\\HCT116_merged6_0.1FA.hg38_loops_two_anchors_binding_common_peaks.bedpe' , header = None)
+loops.columns = ['chr1' , 'start1' , 'end1' , 'chr2' , 'start2' , 'end2']
+
+
+peaks = pd.read_table('H:\\work\\niulongjian\\HiRPC_processed_data\\HCT116\\HCT116_HiRPC_0.1FA\\one-dimensional\\peaks\\HCT116_0.1FA_onedimensional_q0.05_union2_peaks.narrowPeak' , header = None , usecols=(0 , 1 , 2 , 3))
+peaks.columns = ['chr' , 'start' , 'end' , 'peak_name']
+SNPs = pd.read_csv('H:\\work\\Postdoctoral\\GWAS疾病位点检测\\results\\CAD\\first_6000\\CAD_related_SNPs_LD0.99_all_risk_allel_sort_seqname.csv' , header = 0)
+
+peaks_huvec = Load_peaks('H:\\work\\Postdoctoral\\GWAS疾病位点检测\\results\\HiRPC\\one-dimensional\\HUVEC_control_ls_onedimensional_q0.05_union2_peaks.narrowPeak', 'narrow')
+peaks_116 = Load_peaks('H:\\work\\niulongjian\\HiRPC_processed_data\\HCT116\\HCT116_HiRPC_0.1FA\\one-dimensional\\peaks\\HCT116_0.1FA_onedimensional_q0.05_union2_peaks.narrowPeak', 'narrow')
+peaks_116
+peaks_huvec
+promoter = []
+for i in RNA.index:
+    g = RNA.loc[i]['Chr']
+    strand = RNA.loc[i]['Strand']
+    name = RNA.loc[i]['Gene_Name']
+    fpkm = RNA.loc[i]['HCT116_FPKM']
+    if strand == '+':
+        start = RNA.loc[i]['Start'] - 2000
+        end = RNA.loc[i]['End'] 
+    elif strand == '-':
+        start = RNA.loc[i]['Start']
+        end = RNA.loc[i]['End'] + 2000
+    else:
+        print (i)
+    promoter.append((g , start , end , name , fpkm))
+
+promoter = pd.DataFrame(promoter)
+promoter.columns = ['chr' , 'start' , 'end' , 'gene_name' , 'FPKM']
+
+"""
+Created on Mon Jun 10 10:02:12 2024
+
+@author: lenovo
+"""
+
+
+import numpy as np
+import pandas as pd
+from itertools import islice
+import os
+
+
+def Load_peaks(file , peaks_type):
+    sz = os.path.getsize(file)
+    if sz != 0:
+        peaks = pd.read_table(file , header = None)
+        if peaks_type == 'narrow':
+            peaks.columns = ['chr' , 'start' , 'end' , 'name' , 'score' , 'strand' , 'signal' , 'pvalue' , 'qvalue' , 'lengtn']
+        else:
+            peaks.columns = ['chr' , 'start' , 'end' , 'name' , 'score' , 'strand' , 'signal' , 'pvalue' , 'qvalue']
+    else:
+        peaks = []
+    
+    return peaks
+
+
+def Get_SNP_peaks(SNPs , peaks):
+    chrom = ['chr' + str(x) for x in range(1 , 23)] + ['chrX']
+    n = 0; tmp = pd.DataFrame()
+    for g in chrom:
+        tmp_snps = SNPs[SNPs['CHR_ID'] == g.lstrip('chr')]
+        tmp_peaks = peaks[peaks['chr'] == g]
+        
+        for i in tmp_snps.index:
+            pos = tmp_snps.loc[i]['CHR_POS']
+            
+            
+            overlap = tmp_peaks[(tmp_peaks['start'] <= pos + 100) & (tmp_peaks['end'] >= pos - 100)]
+            if len(overlap) != 0:
+                n += 1
+                tmp = pd.concat([tmp , overlap])
+    
+    
+    tmp = tmp.drop_duplicates()
+    return tmp
+
+
+def read_genome(filename):
+    file_genome = open(filename)
+    dict_genome = {}
+    for line in file_genome:
+        line = line.strip('\n')
+        lists = list(line)
+        if len(lists) > 1 and lists[0] == '>' :
+            chrs = (line.split('>')[1]).split()[0]
+            dict_genome[chrs] = []
+        
+        else :
+            dict_genome[chrs].extend(lists)
+    return dict_genome
+
+
+def write_pos_to_seq(CDS , outfil):
+    
+    out = open(outfil , 'w')
+    
+    for i in CDS:
+        out.writelines('>' + i + '_CDS' + '\n')
+        for j in range(len(CDS[i]) // 70 + 1):
+            n1 = j * 70
+            n2 = (j + 1) * 70
+            out.writelines(''.join(CDS[i][n1 : n2]).upper() + '\n')
+    out.close()
+
+def merge_intervals(intervals):
+    if not intervals:
+        return []
+    
+    # 先按照区间的开始时间排序
+    intervals.sort(key=lambda x: x[0])
+    
+    merged = [intervals[0]]
+    for current in intervals:
+        last = merged[-1]
+        if current[0] <= last[1]:  # 如果当前区间的开始时间小于等于最后一个合并区间的结束时间
+            # 合并区间
+            merged[-1] = (last[0], max(last[1], current[1]))
+        else:
+            # 不重叠的区间，直接添加到结果列表中
+            merged.append(current)
+    
+    return merged
+
+
+
+
+
+
+genome_h38 = read_genome('H:\\work\\literature_data\\genome\\hg38\\hg38.fa')
+
+chrom = ['chr' + str(x) for x in range(1 , 23)] + ['chrX']
+
+
+RNA = pd.read_csv('H:\\work\\niulongjian\\HiRPC_processed_data\\K562_HCT116_RNA-seq\\FPKM\\union_all_FPKM.csv' , header = 0)
+
+RNA['HCT116_FPKM'] = (RNA['HCT116_WT_R1_FPKM'] + RNA['HCT116_WT_R2_FPKM']) / 2
+
+RNA = RNA.sort_values(by = ['HCT116_FPKM'] , ascending=False)
+
+RNA = RNA[RNA['Chr'] != 'chrM']
+
+
+
+
+loops = pd.read_table('H:\\work\\niulongjian\\HiRPC_processed_data\\HCT116\\HCT116_HiRPC_0.1FA\\loops\\HCT116_merged6_0.1FA.hg38_loops_two_anchors_binding_common_peaks.bedpe' , header = None)
+loops.columns = ['chr1' , 'start1' , 'end1' , 'chr2' , 'start2' , 'end2']
+
+
+SNPs = pd.read_csv('H:\\work\\Postdoctoral\\GWAS疾病位点检测\\results\\CAD\\first_6000\\CAD_related_SNPs_LD0.99_all_risk_allel_sort_seqname.csv' , header = 0)
+
+peaks_huvec = Load_peaks('H:\\work\\Postdoctoral\\GWAS疾病位点检测\\results\\HiRPC\\one-dimensional\\HUVEC_control_ls_onedimensional_q0.05_union2_peaks.narrowPeak', 'narrow')
+peaks_116 = Load_peaks('H:\\work\\niulongjian\\HiRPC_processed_data\\HCT116\\HCT116_HiRPC_0.1FA\\one-dimensional\\peaks\\HCT116_0.1FA_onedimensional_q0.05_union2_peaks.narrowPeak', 'narrow')
+
+
+
+huvec_snp_peaks = Get_SNP_peaks(SNPs , peaks_huvec)
+hct116_snp_peaks = Get_SNP_peaks(SNPs , peaks_116)
+
+union_snp_peaks = pd.concat([huvec_snp_peaks , hct116_snp_peaks])
+union_snp_peaks = union_snp_peaks.drop_duplicates()
+union_snp_peaks = union_snp_peaks.sort_values(by = ['chr' , 'start' , 'end'])
+import numpy as np
+import pandas as pd
+from itertools import islice
+import os
+
+
+def Load_peaks(file , peaks_type):
+    sz = os.path.getsize(file)
+    if sz != 0:
+        peaks = pd.read_table(file , header = None)
+        if peaks_type == 'narrow':
+            peaks.columns = ['chr' , 'start' , 'end' , 'name' , 'score' , 'strand' , 'signal' , 'pvalue' , 'qvalue' , 'lengtn']
+        else:
+            peaks.columns = ['chr' , 'start' , 'end' , 'name' , 'score' , 'strand' , 'signal' , 'pvalue' , 'qvalue']
+    else:
+        peaks = []
+    
+    return peaks
+
+
+def Get_SNP_peaks(SNPs , peaks):
+    chrom = ['chr' + str(x) for x in range(1 , 23)] + ['chrX']
+    n = 0; tmp = pd.DataFrame()
+    for g in chrom:
+        tmp_snps = SNPs[SNPs['CHR_ID'] == g.lstrip('chr')]
+        tmp_peaks = peaks[peaks['chr'] == g]
+        
+        for i in tmp_snps.index:
+            pos = tmp_snps.loc[i]['CHR_POS']
+            
+            
+            overlap = tmp_peaks[(tmp_peaks['start'] <= pos + 100) & (tmp_peaks['end'] >= pos - 100)]
+            if len(overlap) != 0:
+                n += 1
+                tmp = pd.concat([tmp , overlap])
+    
+    
+    tmp = tmp.drop_duplicates()
+    return tmp
+
+
+def read_genome(filename):
+    file_genome = open(filename)
+    dict_genome = {}
+    for line in file_genome:
+        line = line.strip('\n')
+        lists = list(line)
+        if len(lists) > 1 and lists[0] == '>' :
+            chrs = (line.split('>')[1]).split()[0]
+            dict_genome[chrs] = []
+        
+        else :
+            dict_genome[chrs].extend(lists)
+    return dict_genome
+
+
+def write_pos_to_seq(CDS , outfil):
+    
+    out = open(outfil , 'w')
+    
+    for i in CDS:
+        out.writelines('>' + i + '_CDS' + '\n')
+        for j in range(len(CDS[i]) // 70 + 1):
+            n1 = j * 70
+            n2 = (j + 1) * 70
+            out.writelines(''.join(CDS[i][n1 : n2]).upper() + '\n')
+    out.close()
+
+def merge_intervals(intervals):
+    if not intervals:
+        return []
+    
+    # 先按照区间的开始时间排序
+    intervals.sort(key=lambda x: x[0])
+    
+    merged = [intervals[0]]
+    for current in intervals:
+        last = merged[-1]
+        if current[0] <= last[1]:  # 如果当前区间的开始时间小于等于最后一个合并区间的结束时间
+            # 合并区间
+            merged[-1] = (last[0], max(last[1], current[1]))
+        else:
+            # 不重叠的区间，直接添加到结果列表中
+            merged.append(current)
+    
+    return merged
+chrom = ['chr' + str(x) for x in range(1 , 23)] + ['chrX']
+
+
+RNA = pd.read_csv('H:\\work\\niulongjian\\HiRPC_processed_data\\K562_HCT116_RNA-seq\\FPKM\\union_all_FPKM.csv' , header = 0)
+
+RNA['HCT116_FPKM'] = (RNA['HCT116_WT_R1_FPKM'] + RNA['HCT116_WT_R2_FPKM']) / 2
+
+RNA = RNA.sort_values(by = ['HCT116_FPKM'] , ascending=False)
+
+RNA = RNA[RNA['Chr'] != 'chrM']
+
+
+
+
+loops = pd.read_table('H:\\work\\niulongjian\\HiRPC_processed_data\\HCT116\\HCT116_HiRPC_0.1FA\\loops\\HCT116_merged6_0.1FA.hg38_loops_two_anchors_binding_common_peaks.bedpe' , header = None)
+loops.columns = ['chr1' , 'start1' , 'end1' , 'chr2' , 'start2' , 'end2']
+
+
+SNPs = pd.read_csv('H:\\work\\Postdoctoral\\GWAS疾病位点检测\\results\\CAD\\first_6000\\CAD_related_SNPs_LD0.99_all_risk_allel_sort_seqname.csv' , header = 0)
+
+peaks_huvec = Load_peaks('H:\\work\\Postdoctoral\\GWAS疾病位点检测\\results\\HiRPC\\one-dimensional\\HUVEC_control_ls_onedimensional_q0.05_union2_peaks.narrowPeak', 'narrow')
+peaks_116 = Load_peaks('H:\\work\\niulongjian\\HiRPC_processed_data\\HCT116\\HCT116_HiRPC_0.1FA\\one-dimensional\\peaks\\HCT116_0.1FA_onedimensional_q0.05_union2_peaks.narrowPeak', 'narrow')
+
+
+
+huvec_snp_peaks = Get_SNP_peaks(SNPs , peaks_huvec)
+hct116_snp_peaks = Get_SNP_peaks(SNPs , peaks_116)
+
+union_snp_peaks = pd.concat([huvec_snp_peaks , hct116_snp_peaks])
+union_snp_peaks = union_snp_peaks.drop_duplicates()
+union_snp_peaks = union_snp_peaks.sort_values(by = ['chr' , 'start' , 'end'])
+promoter = []
+for i in RNA.index:
+    g = RNA.loc[i]['Chr']
+    strand = RNA.loc[i]['Strand']
+    name = RNA.loc[i]['Gene_Name']
+    fpkm = RNA.loc[i]['HCT116_FPKM']
+    if strand == '+':
+        start = RNA.loc[i]['Start'] - 2000
+        end = RNA.loc[i]['End'] 
+    elif strand == '-':
+        start = RNA.loc[i]['Start']
+        end = RNA.loc[i]['End'] + 2000
+    else:
+        print (i)
+    promoter.append((g , start , end , name , fpkm))
+
+promoter = pd.DataFrame(promoter)
+promoter.columns = ['chr' , 'start' , 'end' , 'gene_name' , 'FPKM']
+promoter
+peaks_name = ['HCT116_R2_q0.05_peak_14557']
+
+
+# selected_peak_genes = {}
+
+for peak_name in peaks_name:
+    overlap = pd.DataFrame([])
+    selected_genes = pd.DataFrame([])
+    peak = union_snp_peaks[union_snp_peaks['name'] == peak_name]
+    g = peak.iloc[0]['chr']
+    start = peak.iloc[0]['start']
+    end = peak.iloc[0]['end']
+    tmp_loops = loops[loops['chr1'] == g]
+    tmp_snps = SNPs[SNPs['CHR_ID'] == g.lstrip('chr')]
+    mask1 = (tmp_loops['start1'] <= end) & (tmp_loops['end1'] >= start)
+    mask2 = (tmp_loops['start2'] <= end) & (tmp_loops['end2'] >= start)
+    mask3 = (tmp_snps['CHR_POS'] >= start - 100) & (tmp_snps['CHR_POS'] <= end + 100)
+    overlap1 = tmp_loops[mask1]
+    overlap2 = tmp_loops[mask2]
+    overlap3 = tmp_snps[mask3]
+    print (overlap3)
+    if (len(overlap1) != 0):
+        overlap = pd.concat([overlap , overlap1])
+    if (len(overlap2) != 0):
+        overlap = pd.concat([overlap , overlap2])    
+    overlap = overlap.drop_duplicates()
+    # overlap.to_csv('H:\\work\\Postdoctoral\\GWAS疾病位点检测\\results\\HiRPC\\SNP_peaks_loops\\' + peak_name + '.bedpe' , header=None , index = None , sep = '\t')
+    
+    
+    for i in overlap.index:
+        g = overlap.loc[i]['chr1']
+        start1 = overlap.loc[i]['start1']
+        end1 = overlap.loc[i]['end1']
+        start2 = overlap.loc[i]['start2']
+        end2 = overlap.loc[i]['end2']
+        tmp_promoter = promoter[promoter['chr'] == g]
+        mask1 = (tmp_promoter['start'] <= end1) & (tmp_promoter['end'] >= start1)
+        mask2 = (tmp_promoter['start'] <= end2) & (tmp_promoter['end'] >= start2)
+        overlap1 = tmp_promoter[mask1]
+        overlap2 = tmp_promoter[mask2]
+        if len(overlap1) != 0:
+            # print (overlap1)
+            selected_genes = pd.concat([selected_genes , overlap1])
+        if len(overlap2) != 0:
+            # print (overlap2)
+            selected_genes = pd.concat([selected_genes , overlap2])
+    if len(selected_genes) != 0:
+        selected_genes = selected_genes.drop_duplicates()        
+        selected_genes = selected_genes.sort_values(by = 'FPKM' , ascending=False)        
+        # selected_genes = selected_genes[selected_genes['FPKM'] >= 10]
+        # gene_names = list(selected_genes['gene_name'])
+        # selected_peak_genes[peak_name] = gene_names
+        
+        
+        # print (selected_genes)
+        
+        
+        for i in list(selected_genes['gene_name']):
+            if i in CVD_genes:
+                print (peak_name , i)
+                
+CVD_genes
