@@ -1,0 +1,225 @@
+Sender: LSF System <lsfadmin@r01n31>
+Subject: Job 9920444: <rmdup> in cluster <sustchpc> Done
+
+Job <rmdup> was submitted from host <login05> by user <bio-shenw> in cluster <sustchpc> at Fri Sep  5 10:31:46 2025.
+Job was executed on host(s) <4*r01n31>, in queue <ser>, as user <bio-shenw> in cluster <sustchpc> at Fri Sep  5 10:31:46 2025.
+</work/bio-shenw> was used as the home directory.
+</scratch/2025-09-01/bio-shenw/Cardiovascular_disease_STARR-seq/workspace_tanyj_pipeline/workspace_nonrisk/scripts> was used as the working directory.
+Started at Fri Sep  5 10:31:46 2025.
+Terminated at Fri Sep  5 10:40:04 2025.
+Results reported at Fri Sep  5 10:40:04 2025.
+
+Your job looked like:
+
+------------------------------------------------------------
+# LSBATCH: User input
+Rscript S1.3_rmdup_UMI_lxx.R
+------------------------------------------------------------
+
+Successfully completed.
+
+Resource usage summary:
+
+    CPU time :                                   1068.91 sec.
+    Max Memory :                                 9010 MB
+    Average Memory :                             5742.41 MB
+    Total Requested Memory :                     -
+    Delta Memory :                               -
+    Max Swap :                                   -
+    Max Processes :                              3
+    Max Threads :                                39
+    Run time :                                   498 sec.
+    Turnaround time :                            498 sec.
+
+The output (if any) follows:
+
+
+>>>>>> sample ID:  HCT116-P-R1-1_S5_L003
+       reading BED files which contain all fragments....
+     ##------ Fri Sep  5 10:31:50 2025 ------##
+
+       add  0 bp (trimmed in truncate step) in each side of fragments
+       Mark fragments with dT....
+        ##------ Fri Sep  5 10:32:55 2025 ------##
+
+       Count raw fragments with or without dT....
+        ##------ Fri Sep  5 10:33:05 2025 ------##
+
+       Summary of UMI....
+        ##------ Fri Sep  5 10:33:05 2025 ------##
+
+       rmdup with old strategy (chr, start, end, strand)....
+     ##------ Fri Sep  5 10:33:22 2025 ------##
+
+       rmdup with UMI (chr, start, end, strand, UMI)....
+     ##------ Fri Sep  5 10:33:25 2025 ------##
+
+       Summary length of unique fragments (UMI)....
+      ##------ Fri Sep  5 10:33:35 2025 ------##
+NA
+>>>>>> sample ID:  HCT116-P-R2-2_S6_L003
+       reading BED files which contain all fragments....
+     ##------ Fri Sep  5 10:33:37 2025 ------##
+
+       add  0 bp (trimmed in truncate step) in each side of fragments
+       Mark fragments with dT....
+        ##------ Fri Sep  5 10:34:10 2025 ------##
+
+       Count raw fragments with or without dT....
+        ##------ Fri Sep  5 10:34:16 2025 ------##
+
+       Summary of UMI....
+        ##------ Fri Sep  5 10:34:16 2025 ------##
+
+       rmdup with old strategy (chr, start, end, strand)....
+     ##------ Fri Sep  5 10:34:32 2025 ------##
+
+       rmdup with UMI (chr, start, end, strand, UMI)....
+     ##------ Fri Sep  5 10:34:34 2025 ------##
+
+       Summary length of unique fragments (UMI)....
+      ##------ Fri Sep  5 10:34:42 2025 ------##
+NA
+>>>>>> sample ID:  HCT116-R1-4_S1_L003
+       reading BED files which contain all fragments....
+     ##------ Fri Sep  5 10:34:44 2025 ------##
+
+       add  0 bp (trimmed in truncate step) in each side of fragments
+       Mark fragments with dT....
+        ##------ Fri Sep  5 10:35:02 2025 ------##
+
+       Count raw fragments with or without dT....
+        ##------ Fri Sep  5 10:35:04 2025 ------##
+
+       Summary of UMI....
+        ##------ Fri Sep  5 10:35:04 2025 ------##
+
+       rmdup with old strategy (chr, start, end, strand)....
+     ##------ Fri Sep  5 10:35:15 2025 ------##
+
+       rmdup with UMI (chr, start, end, strand, UMI)....
+     ##------ Fri Sep  5 10:35:16 2025 ------##
+
+       Summary length of unique fragments (UMI)....
+      ##------ Fri Sep  5 10:35:22 2025 ------##
+NA
+>>>>>> sample ID:  HCT116-R2-8_S2_L003
+       reading BED files which contain all fragments....
+     ##------ Fri Sep  5 10:35:23 2025 ------##
+
+       add  0 bp (trimmed in truncate step) in each side of fragments
+       Mark fragments with dT....
+        ##------ Fri Sep  5 10:35:44 2025 ------##
+
+       Count raw fragments with or without dT....
+        ##------ Fri Sep  5 10:35:45 2025 ------##
+
+       Summary of UMI....
+        ##------ Fri Sep  5 10:35:45 2025 ------##
+
+       rmdup with old strategy (chr, start, end, strand)....
+     ##------ Fri Sep  5 10:35:55 2025 ------##
+
+       rmdup with UMI (chr, start, end, strand, UMI)....
+     ##------ Fri Sep  5 10:35:56 2025 ------##
+
+       Summary length of unique fragments (UMI)....
+      ##------ Fri Sep  5 10:36:04 2025 ------##
+NA
+>>>>>> sample ID:  HUVEC-P-R1-5_S7_L003
+       reading BED files which contain all fragments....
+     ##------ Fri Sep  5 10:36:07 2025 ------##
+
+       add  0 bp (trimmed in truncate step) in each side of fragments
+       Mark fragments with dT....
+        ##------ Fri Sep  5 10:36:39 2025 ------##
+
+       Count raw fragments with or without dT....
+        ##------ Fri Sep  5 10:36:49 2025 ------##
+
+       Summary of UMI....
+        ##------ Fri Sep  5 10:36:49 2025 ------##
+
+       rmdup with old strategy (chr, start, end, strand)....
+     ##------ Fri Sep  5 10:37:03 2025 ------##
+
+       rmdup with UMI (chr, start, end, strand, UMI)....
+     ##------ Fri Sep  5 10:37:06 2025 ------##
+
+       Summary length of unique fragments (UMI)....
+      ##------ Fri Sep  5 10:37:15 2025 ------##
+NA
+>>>>>> sample ID:  HUVEC-P-R2-7_S8_L003
+       reading BED files which contain all fragments....
+     ##------ Fri Sep  5 10:37:16 2025 ------##
+
+       add  0 bp (trimmed in truncate step) in each side of fragments
+       Mark fragments with dT....
+        ##------ Fri Sep  5 10:37:49 2025 ------##
+
+       Count raw fragments with or without dT....
+        ##------ Fri Sep  5 10:37:52 2025 ------##
+
+       Summary of UMI....
+        ##------ Fri Sep  5 10:37:52 2025 ------##
+
+       rmdup with old strategy (chr, start, end, strand)....
+     ##------ Fri Sep  5 10:38:07 2025 ------##
+
+       rmdup with UMI (chr, start, end, strand, UMI)....
+     ##------ Fri Sep  5 10:38:09 2025 ------##
+
+       Summary length of unique fragments (UMI)....
+      ##------ Fri Sep  5 10:38:21 2025 ------##
+NA
+>>>>>> sample ID:  HUVEC-R1-3_S3_L003
+       reading BED files which contain all fragments....
+     ##------ Fri Sep  5 10:38:22 2025 ------##
+
+       add  0 bp (trimmed in truncate step) in each side of fragments
+       Mark fragments with dT....
+        ##------ Fri Sep  5 10:38:42 2025 ------##
+
+       Count raw fragments with or without dT....
+        ##------ Fri Sep  5 10:38:43 2025 ------##
+
+       Summary of UMI....
+        ##------ Fri Sep  5 10:38:43 2025 ------##
+
+       rmdup with old strategy (chr, start, end, strand)....
+     ##------ Fri Sep  5 10:38:53 2025 ------##
+
+       rmdup with UMI (chr, start, end, strand, UMI)....
+     ##------ Fri Sep  5 10:38:55 2025 ------##
+
+       Summary length of unique fragments (UMI)....
+      ##------ Fri Sep  5 10:39:03 2025 ------##
+NA
+>>>>>> sample ID:  HUVEC-R2-6_S4_L003
+       reading BED files which contain all fragments....
+     ##------ Fri Sep  5 10:39:04 2025 ------##
+
+       add  0 bp (trimmed in truncate step) in each side of fragments
+       Mark fragments with dT....
+        ##------ Fri Sep  5 10:39:38 2025 ------##
+
+       Count raw fragments with or without dT....
+        ##------ Fri Sep  5 10:39:41 2025 ------##
+
+       Summary of UMI....
+        ##------ Fri Sep  5 10:39:41 2025 ------##
+
+       rmdup with old strategy (chr, start, end, strand)....
+     ##------ Fri Sep  5 10:39:50 2025 ------##
+
+       rmdup with UMI (chr, start, end, strand, UMI)....
+     ##------ Fri Sep  5 10:39:52 2025 ------##
+
+       Summary length of unique fragments (UMI)....
+      ##------ Fri Sep  5 10:40:00 2025 ------##
+NA
+
+PS:
+
+Read file <rmdup.err> for stderr output of this job.
+

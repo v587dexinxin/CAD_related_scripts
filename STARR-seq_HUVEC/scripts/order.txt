@@ -1,0 +1,8 @@
+bsub < S1.1_generate_readID_UMI_table_risk.sh
+sh S1.2_mapping.sh
+bsub -J rmdup -q ser -n 4 -e rmdup.err -o rmdup.log -R "span[hosts=1]" Rscript S1.3_rmdup_UMI_lxx.R
+sh S1.4_bed2bam2bw.sh
+
+
+
+
